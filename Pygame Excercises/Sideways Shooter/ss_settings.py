@@ -10,4 +10,7 @@ class Settings:
         self.background_image = pygame.image.load('sky_background.bmp')
         self.background_color = (255, 255, 255)
 
-        self.spaceship_speed = 1.0
+        self.spaceship_speed = 1.3
+        self.bullet_speed = 1.0
+
+        self.amount_bullets_allowed = 4
