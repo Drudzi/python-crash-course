@@ -58,7 +58,8 @@ class SidewaysShooter:
     
     def _update_screen(self):
         """Update the surfaces on the screen and flip the new one."""
-        self.screen.blit(self.settings.background_image, (0, 0))
+        #self.screen.blit(self.settings.background_image, (0, 0))
+        self.screen.fill((self.settings.background_color))
         self.spaceship.blit_spaceship()
         pygame.display.flip()
 

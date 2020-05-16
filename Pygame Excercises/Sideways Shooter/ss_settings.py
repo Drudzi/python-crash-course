@@ -8,5 +8,6 @@ class Settings:
         self.screen_width = 1100
         self.screen_height = 734
         self.background_image = pygame.image.load('sky_background.bmp')
+        self.background_color = (255, 255, 255)
 
-        self.spaceship_speed = 1.5
+        self.spaceship_speed = 1.0
