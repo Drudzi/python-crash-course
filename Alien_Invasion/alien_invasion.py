@@ -6,6 +6,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class AlienInvasion:
@@ -30,6 +31,9 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         #This group class is like a list with some more functionality to it...
         # practical when building games.
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -97,6 +101,24 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _create_fleet(self):
+        """Create the fleet of Aliens."""
+        #Make an alien:
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        
+        #Find number of aliens that can be placed in a row, with a certain spacing in between:
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = available_space_x // (2 * alien_width)
+        
+        #Create the first row of aliens:
+        for alien_number in range(number_aliens_x):
+            #Create an alien and place it in the row:
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
+
     def _update_screen(self): #Also a HELPER method.
         """Update images on the screen, and flip the new screen."""
 
@@ -106,6 +128,8 @@ class AlienInvasion:
 
         for bullet in self.bullets.sprites(): #sprites() returns a list of all sprites in group.
             bullet.draw_bullet()
+        
+        self.aliens.draw(self.screen)
         #Make the most recently drawn screen visible:
         pygame.display.flip()
         #pygame.display.flip() draws an empty screen every time we pass through the while loop and erases the old screen.
