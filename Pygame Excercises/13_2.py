@@ -1,6 +1,7 @@
-#Creates a grid of stars.
+#Creates a screen with 20 stars randomly placed!
 
 import pygame, sys
+from random import randint
 
 from pygame.sprite import Sprite
 
@@ -26,13 +27,13 @@ class StarsGrid:
         """Initialize attributes."""
         pygame.init()
         self.screen_width = 800
-        self.screen_height = 720
+        self.screen_height = 700
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.screen_rect = self.screen.get_rect()
         pygame.display.set_caption('Stars')
 
         self.stars = pygame.sprite.Group()
-
+        self.random = randint(-10, 10)
         self._create_stargrid()
 
     def run(self):
@@ -47,25 +48,14 @@ class StarsGrid:
     def _create_stargrid(self):
         """Create a grid of stars."""
         star = Star(self)
-        star_width, star_height = star.rect.size
+        for num in range(20):
+            self._create_star()
 
-        available_space_x = self.screen_width - (2 * star_width)
-        number_stars_x = available_space_x // (2 * star_width)
-
-        available_space_y = self.screen_height - (2 * star_height)
-        number_stars_y = available_space_y // star_height
-
-        for row_number in range(number_stars_y):
-            for star_number in range(number_stars_x):
-                self._create_star(star_number, row_number)
-
-    def _create_star(self, star_number, row_number):
+    def _create_star(self):
         """Create a star and place it on the grid."""
         star = Star(self)
-        star_width, star_height = star.rect.size
-        star.x = star_width + 2 * star_width * star_number
-        star.rect.x = star.x
-        star.rect.y = star.rect.height + 2 * star.rect.height * row_number
+        star.rect.x = randint(0, 800)
+        star.rect.y = randint(0, 700)
         self.stars.add(star)
 
 
