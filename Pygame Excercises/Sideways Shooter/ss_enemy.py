@@ -15,7 +15,5 @@ class Enemy(Sprite):
         self.image = pygame.image.load(image_filename)
         self.rect = self.image.get_rect()
 
-        self.rect.center = self.screen_rect.center
-
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
