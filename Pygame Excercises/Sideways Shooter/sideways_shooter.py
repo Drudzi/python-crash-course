@@ -83,6 +83,17 @@ class SidewaysShooter:
             if bullet.rect.left > self.screen_rect.right:
                 self.bullets.remove(bullet)
         
+        self._check_bullet_enemy_collision()
+    
+    def _check_bullet_enemy_collision(self):
+        """Respond to bullet-enemy collissions."""
+        #Check whether a bullet has hit an enemy, kill it and remove the bullet:
+        collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
+
+        if not self.enemies:
+            self.bullets.empty()
+            self._create_fleet()
+        
     def _update_enemies(self):
         """Update the positions of the enemies in the fleet."""
         self.enemies.update()
@@ -98,7 +109,9 @@ class SidewaysShooter:
         enemy = Enemy(self)
 
         self.pre_enemies.add(enemy)
-        collisions = pygame.sprite.groupcollide(self.pre_enemies, self.enemies, True, False)
+        
+        collisions = pygame.sprite.groupcollide(
+        self.pre_enemies, self.enemies, True, False, pygame.sprite.collide_rect_ratio(1.2))
         
         if not collisions: #If there was no collision...
             self.enemies.add(enemy)

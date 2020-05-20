@@ -18,6 +18,6 @@ class Settings:
         self.amount_bullets_allowed = 3
 
         #Enemies settings:
-        self.amount_enemies_fleet = 20
+        self.amount_enemies_fleet = 10
         self.enemy_speed = 0.2
-        self.enemy_spawn_delay = 100 #pixels
+        self.enemy_spawn_delay = 150 #pixels
