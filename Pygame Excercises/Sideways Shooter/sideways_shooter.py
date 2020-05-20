@@ -25,6 +25,7 @@ class SidewaysShooter:
         self.spaceship = SpaceShip(self)
 
         self.bullets = pygame.sprite.Group()
+        
         self.pre_enemies = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
