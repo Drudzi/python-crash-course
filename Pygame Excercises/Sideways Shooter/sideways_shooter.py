@@ -5,6 +5,7 @@ import pygame
 from ss_settings import Settings
 from ss_spaceship import SpaceShip
 from ss_bullet import Bullet
+from ss_enemy import Enemy
 
 class SidewaysShooter:
     """An overall class to manage the game and it's resources and behaviour."""
@@ -23,6 +24,8 @@ class SidewaysShooter:
         self.spaceship = SpaceShip(self)
 
         self.bullets = pygame.sprite.Group()
+        self.enemy = Enemy(self)
+
     
     def run_game(self):
         """Method including the main game loop. Runs the game."""
@@ -30,10 +33,9 @@ class SidewaysShooter:
         while True:
             self._check_events()
             self.spaceship.update()
-            self._update_bullets()
+            self._update_bullets()        
             self._update_screen()
-            print(len(self.bullets))
-        
+
     def _check_events(self):
         """Respond to user inputs."""
         for event in pygame.event.get():
