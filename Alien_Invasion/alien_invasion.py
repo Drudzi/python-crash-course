@@ -157,7 +157,6 @@ class AlienInvasion:
 
     def _update_screen(self): #Also a HELPER method.
         """Update images on the screen, and flip the new screen."""
-
         #Redraw the screen:
         self.screen.fill(self.settings.bg_color) #fill() takes a color and fills the background.
         self.ship.blit_ship() #We draw the ship on top of the background after filling the background.
