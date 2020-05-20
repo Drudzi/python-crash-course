@@ -41,7 +41,8 @@ class AlienInvasion:
         #This while loop is continually running the game.
             self._check_events()
             self.ship.update()
-            self._update_bullets()            
+            self._update_bullets()  
+            self._update_aliens()          
             self._update_screen()
 
     def _check_events(self):
@@ -101,6 +102,15 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _update_aliens(self):
+        """
+        Check if the fleet is at an edge,
+        then update the positions of all aliens in the fleet.
+        """
+        self._check_fleet_edges()
+        self.aliens.update()
+        #We use the update() on the aliens group, calling each alien's update() method.
+
     def _create_fleet(self):
         """Create the fleet of Aliens."""
         #Make an alien:
@@ -131,6 +141,19 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _check_fleet_edges(self):
+        """Respond appropriately if any aliens has reached an edge."""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        """Change fleet direction and drop it down."""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
     def _update_screen(self): #Also a HELPER method.
         """Update images on the screen, and flip the new screen."""
