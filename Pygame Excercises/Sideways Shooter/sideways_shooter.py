@@ -1,4 +1,5 @@
 import sys, cProfile
+from random import randint
 
 import pygame
 
@@ -8,7 +9,7 @@ from ss_bullet import Bullet
 from ss_enemy import Enemy
 
 class SidewaysShooter:
-    """An overall class to manage the game and it's resources and behaviour."""
+    """The overall class to manage the game and it's resources and behaviour."""
     
     def __init__(self):
         """Initialize the game and create its resources."""
@@ -24,16 +25,18 @@ class SidewaysShooter:
         self.spaceship = SpaceShip(self)
 
         self.bullets = pygame.sprite.Group()
-        self.enemy = Enemy(self)
+        self.enemies = pygame.sprite.Group()
 
-    
+        self._create_fleet()
+
     def run_game(self):
         """Method including the main game loop. Runs the game."""
         
         while True:
             self._check_events()
             self.spaceship.update()
-            self._update_bullets()        
+            self._update_bullets()
+            self._update_enemies() 
             self._update_screen()
 
     def _check_events(self):
@@ -78,15 +81,40 @@ class SidewaysShooter:
         for bullet in self.bullets.copy():
             if bullet.rect.left > self.screen_rect.right:
                 self.bullets.remove(bullet)
-            
+        
+    def _update_enemies(self):
+        """Update the positions of the enemies in the fleet."""
+        self.enemies.update()
     
+    def _create_fleet(self):
+        """Create an enemy fleet."""
+        enemy = Enemy(self)
+        for number in range(self.settings.amount_enemies_fleet):
+            self._create_enemy()
+    
+    def _create_enemy(self):
+        """Create an enemy and set its position."""
+        enemy = Enemy(self)
+        
+        x_spawn_range_a = (self.settings.enemy_spawn_delay + self.screen_rect.width)
+        x_spawn_range_b = (self.screen_rect.width * 2)
+        
+        y_spawn_range_a = enemy.height
+        y_spawn_range_b = (self.screen_rect.height - enemy.height * 2)
+        
+        enemy.x = randint(x_spawn_range_a, x_spawn_range_b)
+        enemy.rect.x = enemy.x
+        enemy.rect.y = randint(y_spawn_range_a, y_spawn_range_b)
+        self.enemies.add(enemy)
+            
     def _update_screen(self):
         """Update the surfaces on the screen and flip the new one."""
         #self.screen.blit(self.settings.background_image, (0, 0))
         self.screen.fill((self.settings.background_color))
-        self.spaceship.blit_spaceship()
         for bullet in self.bullets.sprites():
             bullet.blit_bullet()
+        self.spaceship.blit_spaceship()
+        self.enemies.draw(self.screen)
         pygame.display.flip()
 
 

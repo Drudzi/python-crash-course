@@ -182,6 +182,7 @@ class AlienInvasion:
             bullet.draw_bullet()
         
         self.aliens.draw(self.screen)
+        
         #Make the most recently drawn screen visible:
         pygame.display.flip()
         #pygame.display.flip() draws an empty screen every time we pass through the while loop and erases the old screen.

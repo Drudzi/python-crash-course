@@ -10,7 +10,14 @@ class Settings:
         self.background_image = pygame.image.load('sky_background.bmp')
         self.background_color = (255, 255, 255)
 
+        #Spaceship settings:
         self.spaceship_speed = 1.3
+        
+        #Bullet settings:
         self.bullet_speed = 1.0
+        self.amount_bullets_allowed = 3
 
-        self.amount_bullets_allowed = 4
+        #Enemies settings:
+        self.amount_enemies_fleet = 12
+        self.enemy_speed = 0.2
+        self.enemy_spawn_delay = 100 #pixels
