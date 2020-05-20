@@ -101,6 +101,23 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        
+        self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self):
+        """Respond to bullet-alien collisions."""
+        #Check for any bullets that have hit aliens:
+        # If so, get rid of the bullet and the alien that was hit.
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        #sprite.groupcollide(group1, group2, dokill1, dokill2, collided = None) -> Sprite_dict
+        # groupcollide compares positions of rects in group 1 and rects in group 2.
+        #  whenever it finds collisions it adds a key-value pair to its dictionary.
+        #   parameters 3 (group1) and 4 (group2) decides if a collided rect should disappear(True) or not(False).
+
+        #If aliens group is empty, destroy existing bullets and create a new fleet:
+        if not self.aliens: #Empty group gives False.
+            self.bullets.empty()
+            self._create_fleet()
 
     def _update_aliens(self):
         """
