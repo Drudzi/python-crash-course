@@ -25,6 +25,7 @@ class SidewaysShooter:
         self.spaceship = SpaceShip(self)
 
         self.bullets = pygame.sprite.Group()
+        self.pre_enemies = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
         self._create_fleet()
@@ -88,24 +89,22 @@ class SidewaysShooter:
     
     def _create_fleet(self):
         """Create an enemy fleet."""
-        enemy = Enemy(self)
-        for number in range(self.settings.amount_enemies_fleet):
-            self._create_enemy()
     
+        while len(self.enemies.sprites()) <= (self.settings.amount_enemies_fleet - 1):
+            self._create_enemy()
+               
     def _create_enemy(self):
         """Create an enemy and set its position."""
         enemy = Enemy(self)
+
+        self.pre_enemies.add(enemy)
+        collisions = pygame.sprite.groupcollide(self.pre_enemies, self.enemies, True, False)
         
-        x_spawn_range_a = (self.settings.enemy_spawn_delay + self.screen_rect.width)
-        x_spawn_range_b = (self.screen_rect.width * 2)
+        if not collisions: #If there was no collision...
+            self.enemies.add(enemy)
         
-        y_spawn_range_a = enemy.height
-        y_spawn_range_b = (self.screen_rect.height - enemy.height * 2)
-        
-        enemy.x = randint(x_spawn_range_a, x_spawn_range_b)
-        enemy.rect.x = enemy.x
-        enemy.rect.y = randint(y_spawn_range_a, y_spawn_range_b)
-        self.enemies.add(enemy)
+        self.pre_enemies.empty()
+        collisions.clear()
             
     def _update_screen(self):
         """Update the surfaces on the screen and flip the new one."""
