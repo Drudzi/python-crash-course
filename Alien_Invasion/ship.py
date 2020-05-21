@@ -63,3 +63,8 @@ class Ship:
         """Draw the ship at its current location."""
         self.screen.blit(self.image, self.rect) 
         #blit() wants 1. a source (image), and 2. a destination for it, which is self.rect in this case.
+    
+    def center_ship(self):
+        """Center the position of the ship."""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
