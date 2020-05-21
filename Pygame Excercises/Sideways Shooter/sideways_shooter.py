@@ -1,5 +1,6 @@
 import sys, cProfile
 from random import randint
+from time import sleep
 
 import pygame
 
@@ -7,6 +8,7 @@ from ss_settings import Settings
 from ss_spaceship import SpaceShip
 from ss_bullet import Bullet
 from ss_enemy import Enemy
+from ss_gamestats import GameStats
 
 class SidewaysShooter:
     """The overall class to manage the game and it's resources and behaviour."""
@@ -22,6 +24,8 @@ class SidewaysShooter:
         self.screen_rect = self.screen.get_rect()
         pygame.display.set_caption("Sideways Shooter")
 
+        self.stats = GameStats(self)
+
         self.spaceship = SpaceShip(self)
 
         self.bullets = pygame.sprite.Group()
@@ -36,9 +40,12 @@ class SidewaysShooter:
         
         while True:
             self._check_events()
-            self.spaceship.update()
-            self._update_bullets()
-            self._update_enemies() 
+            
+            if self.stats.game_active:
+                self.spaceship.update()
+                self._update_bullets()
+                self._update_enemies() 
+            
             self._update_screen()
 
     def _check_events(self):
@@ -90,6 +97,8 @@ class SidewaysShooter:
         """Respond to bullet-enemy collissions."""
         #Check whether a bullet has hit an enemy, kill it and remove the bullet:
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
+        if collisions:
+            self.stats.enemies_killed += 1
 
         if not self.enemies:
             self.bullets.empty()
@@ -98,6 +107,11 @@ class SidewaysShooter:
     def _update_enemies(self):
         """Update the positions of the enemies in the fleet."""
         self.enemies.update()
+
+        if pygame.sprite.spritecollideany(self.spaceship, self.enemies):
+            self._ship_hit()
+        
+        self._check_enemies_leftEdge()
     
     def _create_fleet(self):
         """Create an enemy fleet."""
@@ -119,6 +133,28 @@ class SidewaysShooter:
         
         self.pre_enemies.empty()
         collisions.clear()
+    
+    def _ship_hit(self):
+        """Respond to the spaceship getting hit by an enemy."""
+        if self.stats.spaceships_used < self.settings.spaceship_limit:
+            self.stats.spaceships_used += 1
+
+            self.bullets.empty()
+            self.enemies.empty()
+  
+            self.spaceship.center_spaceship()
+
+            sleep(0.5)
+        
+        else:
+            self.stats.game_active = False
+    
+    def _check_enemies_leftEdge(self):
+        """Respond to an enemy reaching the left edge of the screen."""
+        for enemy in self.enemies.sprites():
+            if enemy.rect.left <= 0:
+                self._ship_hit()
+                break
             
     def _update_screen(self):
         """Update the surfaces on the screen and flip the new one."""

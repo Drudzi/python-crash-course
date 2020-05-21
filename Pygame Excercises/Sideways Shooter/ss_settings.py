@@ -12,6 +12,7 @@ class Settings:
 
         #Spaceship settings:
         self.spaceship_speed = 1.3
+        self.spaceship_limit = 3
         
         #Bullet settings:
         self.bullet_speed = 1.0
