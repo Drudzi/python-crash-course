@@ -11,7 +11,8 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
-from button import Button
+from play_button import Button
+from diff_buttons import EasyButton, MediumButton, HardButton
 
 
 class AlienInvasion:

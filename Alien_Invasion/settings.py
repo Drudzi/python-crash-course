@@ -28,6 +28,12 @@ class Settings:
         #How quickly the game speeds up:
         self.speedup_scale = 1.1
 
+        #Difficulty-buttons' settings:
+        self.easy_button_color = (0, 200, 0)
+        self.medium_button_color = (200, 200, 0)
+        self.hard_button_color = (200, 0, 0)
+        self.active_difficulty_text_color = (200, 200, 200)
+
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
