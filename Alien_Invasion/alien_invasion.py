@@ -11,6 +11,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from scoreboard import ScoreBoard
 from play_button import Button
 from diff_button import DifficultyButton
 
@@ -31,8 +32,10 @@ class AlienInvasion:
         self.screen_rect = self.screen.get_rect()
         pygame.display.set_caption("Alien Invasion") #Title the game window.
 
-        #Create an instance to store game statistics:
+        #Create an instance to store game statistics,
+        # and create a scoreboard:
         self.stats = GameStats(self)
+        self.sb = ScoreBoard(self)
 
         self.ship = Ship(self) #We make an instance of our ship.
         #Ship() requires one argument, an instance of AlienInvasion.
@@ -102,6 +105,7 @@ class AlienInvasion:
             #Reset the statistics and start the game:
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score() #Rewrite the score after it's been reset.
 
             #Get rid of any remaining aliens and bullets:
             self.aliens.empty()
@@ -167,7 +171,8 @@ class AlienInvasion:
             #If q is pressed, exit the game.
             sys.exit()
         elif event.key == pygame.K_SPACE:
-            self._fire_bullet()
+            if self.stats.game_active: #With this if-block, you can't shoot in the "menu".
+                self._fire_bullet()
         
         elif event.key == pygame.K_p:
             self.stats.reset_stats()
@@ -219,6 +224,14 @@ class AlienInvasion:
         # groupcollide compares positions of rects in group 1 and rects in group 2.
         #  whenever it finds collisions it adds a key-value pair to its dictionary.
         #   parameters 3 (group1) and 4 (group2) decides if a collided rect should disappear(True) or not(False).
+
+        if collisions: #If collisions have been found, increase the player's score.
+            for aliens in collisions.values():
+                #We access a list of the dict's values with values().
+                #The key is a bullet with a list of aliens it has collided with as value.
+                #We go through this list just in case a bullet has hit more than one alien at the same time.
+                self.stats.score += self.settings.alien_points * len(aliens)
+            self.sb.prep_score()
 
         #If aliens group is empty, destroy existing bullets and create a new fleet:
         if not self.aliens: #Empty group gives False.
@@ -326,6 +339,9 @@ class AlienInvasion:
             bullet.draw_bullet()
         
         self.aliens.draw(self.screen)
+
+        #Draw the score information:
+        self.sb.show_score()
 
         #Draw the play button if the game is inactive.
         if not self.stats.game_active:
