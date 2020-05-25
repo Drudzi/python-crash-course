@@ -1,10 +1,12 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship:
+class Ship(Sprite):
     """A class to manage the ship."""
 
     def __init__(self, ai_game): #Argument AlienInvasion instance to get access to all the game resources.
         """Initialize the ship and set its starting position."""
+        super().__init__()
         self.screen = ai_game.screen #This lets us work with the AI screen in this class.
         self.screen_rect = ai_game.screen.get_rect() #We access the screen's rectangle values with get_rect().
         self.settings = ai_game.settings #We access game settings in the ship methods.

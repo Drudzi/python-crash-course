@@ -81,6 +81,8 @@ class AlienInvasion:
             #Inside this loop, we write series of if-statements to detect and respond to specific events.
                 
             if event.type == pygame.QUIT: #If player clicks at window's close button, pygame.QUIT() is detected.
+                with open(self.stats.high_score_file, 'w') as f:
+                    f.write(str(self.stats.high_score))
                 sys.exit() #Exits the game.
             
             elif event.type == pygame.KEYDOWN:      #If a key is pressed down...
@@ -107,6 +109,7 @@ class AlienInvasion:
             self.stats.game_active = True
             self.sb.prep_score() #Rewrite the score after it's been reset.
             self.sb.prep_level() #Also rewrite the level.
+            self.sb.prep_ships()
 
             #Get rid of any remaining aliens and bullets:
             self.aliens.empty()
@@ -169,7 +172,9 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT: #If left arrow key is pressed...
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
-            #If q is pressed, exit the game.
+            #If q is pressed, store the high score and exit the game.
+            with open(self.stats.high_score_file, 'w') as f:
+                f.write(str(self.stats.high_score))
             sys.exit()
         elif event.key == pygame.K_SPACE:
             if self.stats.game_active: #With this if-block, you can't shoot in the "menu".
@@ -311,6 +316,7 @@ class AlienInvasion:
         #Decrement amount of ships (lives) left:
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
 
             #Get rid of any remaining aliens and bullets:
             self.aliens.empty()
