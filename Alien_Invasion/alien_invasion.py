@@ -232,6 +232,7 @@ class AlienInvasion:
                 #We go through this list just in case a bullet has hit more than one alien at the same time.
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
 
         #If aliens group is empty, destroy existing bullets and create a new fleet:
         if not self.aliens: #Empty group gives False.
