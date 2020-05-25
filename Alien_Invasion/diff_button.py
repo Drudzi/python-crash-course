@@ -9,6 +9,9 @@ class DifficultyButton:
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
 
+        #Create an instance of play-button to refer to while setting positions:
+        self.play_button = ai_game.play_button
+
         self.difficulty = difficulty
 
         self.width = 95
@@ -19,7 +22,7 @@ class DifficultyButton:
 
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         #Setting y-pos at the top of the screen:
-        self.rect.top = self.screen_rect.top
+        self.rect.bottom = self.play_button.rect.top - self.height
         self._set_x()
 
         self._prep_msg(msg)
@@ -33,13 +36,13 @@ class DifficultyButton:
     def _set_x(self):
         """Set the x position of the given difficulty's button."""
         if self.difficulty == 'easy':
-            self.rect.right = self.screen_rect.centerx - (self.width / 2) - 50            
+            self.rect.right = self.screen_rect.centerx - (self.width / 2) - 30            
 
         elif self.difficulty == 'medium':
             self.rect.centerx = self.screen_rect.centerx
 
         elif self.difficulty.lower() == 'hard':
-            self.rect.left = self.screen_rect.centerx + (self.width / 2) + 50
+            self.rect.left = self.screen_rect.centerx + (self.width / 2) + 30
 
     def draw_button(self):
         """Draw the blank button and then the text onto the screen."""

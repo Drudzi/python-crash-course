@@ -16,7 +16,7 @@ class ScoreBoard:
 
         #Font settings for scoring information:
         self.text_color = (30, 30, 30)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont(None, 40)
 
         #Prepare the initial score image:
         self.prep_score()
@@ -36,8 +36,8 @@ class ScoreBoard:
         
         #Display the score at the top right of the screen:
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.right = self.screen_rect.right - 20
-        self.score_rect.top = 20
+        self.score_rect.right = self.screen_rect.right - 15
+        self.score_rect.top = 15
     
     def prep_high_score(self):
         """Turn the high score into a rendered image."""
@@ -48,12 +48,12 @@ class ScoreBoard:
         #Set the high score rect at the top center of screen:
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.centerx = self.screen_rect.centerx
-        self.high_score_rect.top = self.screen_rect.top
+        self.high_score_rect.top = self.screen_rect.top + 15
     
     def prep_level(self):
         """Turn the level into a rendered image."""
         level_str = str(self.stats.level)
-        self.level_image = self.font.render(level_str, True, self.text_color, self.settings.bg_color)
+        self.level_image = self.font.render(level_str, True, self.text_color) #, self.settings.bg_color)
 
         #Position the level image below the score:
         self.level_rect = self.level_image.get_rect()
@@ -65,13 +65,16 @@ class ScoreBoard:
         self.ships = Group()
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_game)
-            ship.rect.x = 10 + ship_number * ship.rect.width
+            ship.rect.x = 10 + ship_number * ship.rect.width * 1.2
             ship.rect.y = 10
             self.ships.add(ship)
     
-    def check_high_score(self):
+    def check_high_score(self, ai_game):
         """Check if there is a new high score."""
         if self.stats.score > self.stats.high_score:
+            self.stats.after_high_score_kill_count += 1
+            if self.stats.after_high_score_kill_count == 1:
+                ai_game.high_score_sound.play()
             self.stats.high_score = self.stats.score
             self.prep_high_score()
     

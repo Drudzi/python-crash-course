@@ -13,6 +13,12 @@ class Settings:
         self.screen_height = 734
         self.bg_color = (230, 230, 230)
 
+        #Sounds:
+        self.bullet_sound = 'sounds/laser.wav'
+        self.alien_kill_sound = 'sounds/explosion.wav'
+        self.level_up_sound = 'sounds/level_up_tone.wav'
+        self.high_score_sound = 'sounds/high_score.wav'
+
         #Ship settings:
         self.ship_limit = 3
 
@@ -50,7 +56,7 @@ class Settings:
         #fleet_direction of 1 represents right; -1 represents left.
 
         #Scoring:
-        self.alien_points = 50   
+        self.alien_points = 50
     
     def increase_speed(self):
         """Increase speed settings and alien-point-values."""

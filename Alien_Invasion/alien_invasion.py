@@ -56,6 +56,17 @@ class AlienInvasion:
         self.medium_button = DifficultyButton(self, "Medium", self.settings.medium_button_color, difficulty='medium')
         self.hard_button = DifficultyButton(self, "Hard", self.settings.hard_button_color, difficulty='hard')
 
+        #Set the sounds of the game:
+        self.bullet_sound = pygame.mixer.Sound(self.settings.bullet_sound)
+        self.alien_kill_sound = pygame.mixer.Sound(self.settings.alien_kill_sound)
+        self.level_up_sound = pygame.mixer.Sound(self.settings.level_up_sound)
+        self.high_score_sound = pygame.mixer.Sound(self.settings.high_score_sound)
+
+        #Modify volumes of the sounds:
+        self.bullet_sound.set_volume(0.7)
+        self.alien_kill_sound.set_volume(0.3)
+        self.level_up_sound.set_volume(0.3)
+
     def run_game(self):
         """Start the main loop for the game."""
         while True:
@@ -178,6 +189,7 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             if self.stats.game_active: #With this if-block, you can't shoot in the "menu".
+                self.bullet_sound.play()
                 self._fire_bullet()
         
         elif event.key == pygame.K_p:
@@ -232,24 +244,30 @@ class AlienInvasion:
         #   parameters 3 (group1) and 4 (group2) decides if a collided rect should disappear(True) or not(False).
 
         if collisions: #If collisions have been found, increase the player's score.
+            self.alien_kill_sound.play()
             for aliens in collisions.values():
                 #We access a list of the dict's values with values().
                 #The key is a bullet with a list of aliens it has collided with as value.
                 #We go through this list just in case a bullet has hit more than one alien at the same time.
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
-            self.sb.check_high_score()
+            self.sb.check_high_score(self)
 
         #If aliens group is empty, destroy existing bullets and create a new fleet:
         if not self.aliens: #Empty group gives False.
             self.bullets.empty()
+                    
+            level_up_sound_length = float(self.level_up_sound.get_length())
+            self.level_up_sound.play()
+            sleep(level_up_sound_length)
+
             self._create_fleet()
             self.settings.increase_speed()
 
             #Increase the level:
             self.stats.level += 1
             self.sb.prep_level()
-
+            
     def _update_aliens(self):
         """
         Check if the fleet is at an edge,
