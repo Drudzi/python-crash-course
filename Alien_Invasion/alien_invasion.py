@@ -106,6 +106,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score() #Rewrite the score after it's been reset.
+            self.sb.prep_level() #Also rewrite the level.
 
             #Get rid of any remaining aliens and bullets:
             self.aliens.empty()
