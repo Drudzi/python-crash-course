@@ -240,6 +240,10 @@ class AlienInvasion:
             self._create_fleet()
             self.settings.increase_speed()
 
+            #Increase the level:
+            self.stats.level += 1
+            self.sb.prep_level()
+
     def _update_aliens(self):
         """
         Check if the fleet is at an edge,
