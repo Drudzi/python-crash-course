@@ -98,7 +98,8 @@ class SidewaysShooter:
         #Check whether a bullet has hit an enemy, kill it and remove the bullet:
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
         if collisions:
-            self.stats.enemies_killed += 1
+            for enemy in collisions.values():
+                self.stats.score += 100
 
         if not self.enemies:
             self.bullets.empty()

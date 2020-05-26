@@ -11,4 +11,4 @@ class GameStats:
 
     def reset_stats(self):
         self.spaceships_used = 0
-        self.enemies_killed = 0
+        self.score = 0

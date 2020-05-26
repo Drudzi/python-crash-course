@@ -19,6 +19,13 @@ class Settings:
         self.amount_bullets_allowed = 3
 
         #Enemies settings:
-        self.amount_enemies_fleet = 10
-        self.enemy_speed = 0.2
+        self.amount_enemies_fleet = 14
+        self.enemy_speed = 0.3
         self.enemy_spawn_delay = 150 #pixels
+
+        #Button settings:
+        self.play_button_width = 200
+        self.play_button_height = 100
+        
+        self.diff_button_width = 150
+        self.diff_button_height = 80
