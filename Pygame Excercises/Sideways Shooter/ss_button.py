@@ -14,7 +14,11 @@ class Button:
         self.screen = game_instance.screen
         self.screen_rect = self.screen.get_rect()
 
-        if type.lower() == 'easy' or 'medium' or 'hard':
+        if type.lower() == 'easy':
+            self.width, self.height = self.settings.diff_button_width, self.settings.diff_button_height
+        if type.lower() == 'medium':
+            self.width, self.height = self.settings.diff_button_width, self.settings.diff_button_height
+        if type.lower() == 'hard':
             self.width, self.height = self.settings.diff_button_width, self.settings.diff_button_height
         elif type.lower() == 'play':
             self.width, self.height = self.settings.play_button_width, self.settings.play_button_height

@@ -9,6 +9,7 @@ from ss_spaceship import SpaceShip
 from ss_bullet import Bullet
 from ss_enemy import Enemy
 from ss_gamestats import GameStats
+from ss_button import Button
 
 class SidewaysShooter:
     """The overall class to manage the game and it's resources and behaviour."""
@@ -33,6 +34,11 @@ class SidewaysShooter:
         self.pre_enemies = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
+        self.play_button = Button(self, 'Play', 'play', (0, 150, 0), 48)
+        self.easy_button = Button(self, 'Easy', 'easy', (180, 180, 0), 32)
+        self.medium_button = Button(self, 'Medium', 'medium', (200, 140, 0), 32)
+        self.hard_button = Button(self, 'Hard', 'hard', (150, 0, 0), 32)
+
         self._create_fleet()
 
     def run_game(self):
@@ -44,7 +50,7 @@ class SidewaysShooter:
             if self.stats.game_active:
                 self.spaceship.update()
                 self._update_bullets()
-                self._update_enemies() 
+                self._update_enemies()
             
             self._update_screen()
 
@@ -59,6 +65,67 @@ class SidewaysShooter:
             
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+                self._check_difficulty_buttons(mouse_pos)
+    
+    def _check_play_button(self, mouse_pos):
+        """Resond to the play-button being clicked."""
+        click = self.play_button.rect.collidepoint(mouse_pos)
+        if click and not self.stats.game_active:
+            
+            self.settings.initialize_dynamic_settings()
+            self.stats.reset_stats()
+            self.stats.game_active = True
+            self.bullets.empty()
+            self.enemies.empty()
+            self._create_fleet()
+            self.spaceship.center_spaceship()
+
+            pygame.mouse.set_visible(False)
+    
+    def _check_difficulty_buttons(self, mouse_pos):
+        """Resond to clicks on diff-buttons."""
+        easy_click = self.easy_button.rect.collidepoint(mouse_pos)
+        medium_click = self.medium_button.rect.collidepoint(mouse_pos)
+        hard_click = self.hard_button.rect.collidepoint(mouse_pos)
+
+        if easy_click and not self.stats.game_active:
+            self.settings.difficulty = 'easy'
+            self.settings.speedup_scale = 1.1
+        
+        elif medium_click and not self.stats.game_active:
+            self.settings.difficulty = 'medium'
+            self.settings.speedup_scale = 1.2
+        
+        elif hard_click and not self.stats.game_active:
+            self.settings.difficulty = 'hard'
+            self.settings.speedup_scale = 1.3
+    
+    def _active_difficulty_text_color(self):
+        """Set the appropriate text color on the diff-buttons."""
+        if self.settings.difficulty == 'easy':
+            self.easy_button.text_color = self.settings.active_diff_text_color
+            self.easy_button._prep_msg('Easy')
+        else:
+            self.easy_button.text_color = (255, 255, 255)
+            self.easy_button._prep_msg('Easy')
+        
+        if self.settings.difficulty == 'medium':
+            self.medium_button.text_color = self.settings.active_diff_text_color
+            self.medium_button._prep_msg('Medium')
+        else:
+            self.medium_button.text_color = (255, 255, 255)
+            self.medium_button._prep_msg('Medium')
+        
+        if self.settings.difficulty == 'hard':
+            self.hard_button.text_color = self.settings.active_diff_text_color
+            self.hard_button._prep_msg('Hard')
+        else:
+            self.hard_button.text_color = (255, 255, 255)
+            self.hard_button._prep_msg('Hard')
 
     def _check_keydown_events(self, event):
         """Check if a key has been pressed."""
@@ -161,10 +228,20 @@ class SidewaysShooter:
         """Update the surfaces on the screen and flip the new one."""
         #self.screen.blit(self.settings.background_image, (0, 0))
         self.screen.fill((self.settings.background_color))
+        
         for bullet in self.bullets.sprites():
             bullet.blit_bullet()
+        
         self.spaceship.blit_spaceship()
         self.enemies.draw(self.screen)
+        
+        if not self.stats.game_active:
+            self._active_difficulty_text_color()
+            self.play_button.draw_button()
+            self.easy_button.draw_button()
+            self.medium_button.draw_button()
+            self.hard_button.draw_button()
+
         pygame.display.flip()
 
 
