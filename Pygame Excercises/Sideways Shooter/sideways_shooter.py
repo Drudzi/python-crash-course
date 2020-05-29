@@ -10,6 +10,7 @@ from ss_bullet import Bullet
 from ss_enemy import Enemy
 from ss_gamestats import GameStats
 from ss_button import Button
+from ss_scoreboard import ScoreBoard
 
 class SidewaysShooter:
     """The overall class to manage the game and it's resources and behaviour."""
@@ -26,6 +27,7 @@ class SidewaysShooter:
         pygame.display.set_caption("Sideways Shooter")
 
         self.stats = GameStats(self)
+        self.scoreboard = ScoreBoard(self)
 
         self.spaceship = SpaceShip(self)
 
@@ -79,9 +81,14 @@ class SidewaysShooter:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
-            self.bullets.empty()
+
+            self.scoreboard.prep_score()
+            
             self.enemies.empty()
+            self.bullets.empty()
+            
             self._create_fleet()
+            
             self.spaceship.center_spaceship()
 
             pygame.mouse.set_visible(False)
@@ -164,13 +171,17 @@ class SidewaysShooter:
         """Respond to bullet-enemy collissions."""
         #Check whether a bullet has hit an enemy, kill it and remove the bullet:
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
+
         if collisions:
-            for enemy in collisions.values():
-                self.stats.score += 100
+            for enemies in collisions.values():
+                self.stats.score += self.settings.kill_score * len(enemies)
+            
+            self.scoreboard.prep_score()
 
         if not self.enemies:
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
         
     def _update_enemies(self):
         """Update the positions of the enemies in the fleet."""
@@ -207,15 +218,17 @@ class SidewaysShooter:
         if self.stats.spaceships_used < self.settings.spaceship_limit:
             self.stats.spaceships_used += 1
 
-            self.bullets.empty()
             self.enemies.empty()
-  
+            self.bullets.empty()
+
+            self._create_fleet()
             self.spaceship.center_spaceship()
 
             sleep(0.5)
         
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
     
     def _check_enemies_leftEdge(self):
         """Respond to an enemy reaching the left edge of the screen."""
@@ -228,19 +241,21 @@ class SidewaysShooter:
         """Update the surfaces on the screen and flip the new one."""
         #self.screen.blit(self.settings.background_image, (0, 0))
         self.screen.fill((self.settings.background_color))
+        self.spaceship.blit_spaceship()
         
         for bullet in self.bullets.sprites():
             bullet.blit_bullet()
         
-        self.spaceship.blit_spaceship()
         self.enemies.draw(self.screen)
+
+        self.scoreboard.draw_score()
         
         if not self.stats.game_active:
-            self._active_difficulty_text_color()
             self.play_button.draw_button()
             self.easy_button.draw_button()
             self.medium_button.draw_button()
             self.hard_button.draw_button()
+            self._active_difficulty_text_color()
 
         pygame.display.flip()
 

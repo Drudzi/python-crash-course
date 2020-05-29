@@ -21,7 +21,7 @@ class Settings:
         self.amount_bullets_allowed = 3
 
         #Enemies settings:
-        self.amount_enemies_fleet = 14  
+        self.amount_enemies_fleet = 10
         self.enemy_spawn_delay = 150 #pixels
 
         #Button settings:
@@ -32,11 +32,13 @@ class Settings:
         self.diff_button_height = 70
 
         self.active_diff_text_color = (50, 50, 50)
+
+        self.initialize_dynamic_settings()
     
     def initialize_dynamic_settings(self):
         self.enemy_speed = 0.3
         self.bullet_speed = 1.0
-        self.spaceship_speed = 1.1
+        self.spaceship_speed = 0.9
 
         self.kill_score = 100
     
@@ -44,4 +46,4 @@ class Settings:
         """Increase the speed of the game."""
         self.enemy_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
-        self.kill_score *= self.score_scale
+        self.kill_score = int(self.kill_score * self.score_scale)
