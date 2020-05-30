@@ -177,11 +177,14 @@ class SidewaysShooter:
                 self.stats.score += self.settings.kill_score * len(enemies)
             
             self.scoreboard.prep_score()
+            self.scoreboard.check_high_score()
 
         if not self.enemies:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+            self.stats.level += 1
+            self.scoreboard.prep_level()
         
     def _update_enemies(self):
         """Update the positions of the enemies in the fleet."""
