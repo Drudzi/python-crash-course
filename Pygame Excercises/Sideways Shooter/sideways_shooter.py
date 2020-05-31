@@ -210,7 +210,7 @@ class SidewaysShooter:
         self.pre_enemies.add(enemy)
         
         collisions = pygame.sprite.groupcollide(
-        self.pre_enemies, self.enemies, True, False, pygame.sprite.collide_rect_ratio(1.3))
+        self.pre_enemies, self.enemies, True, False, pygame.sprite.collide_rect_ratio(1.2))
         
         if not collisions: #If there was no collision...
             self.enemies.add(enemy)

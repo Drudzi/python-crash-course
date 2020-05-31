@@ -32,7 +32,19 @@ class Enemy(Sprite):
         self.rect.x = self.x
         self.y = randint(y_spawn_range_a, y_spawn_range_b)
         self.rect.y = self.y
-    
+        self.initial_y = self.y    
+
     def update(self):
-        self.x -= self.settings.enemy_speed
+        
+
+        self.x -= self.settings.enemy_speed_x
         self.rect.x = int(self.x)
+
+        # if self.rect.y < self.initial_y - 100:
+        #     self.settings.enemy_y_direction *= -1
+        
+        # if self.rect.y > self.initial_y + 100:
+        #     self.settings.enemy_y_direction *= -1
+        
+        # self.y += self.settings.enemy_speed_y * self.settings.enemy_y_direction
+        # self.rect.y = int(self.y)

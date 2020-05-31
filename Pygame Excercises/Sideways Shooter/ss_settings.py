@@ -36,7 +36,9 @@ class Settings:
         self.initialize_dynamic_settings()
     
     def initialize_dynamic_settings(self):
-        self.enemy_speed = 0.3
+        self.enemy_speed_x = 0.3
+        self.enemy_speed_y = 0.1
+        self.enemy_y_direction = 1
         self.bullet_speed = 1.0
         self.spaceship_speed = 0.9
 
@@ -44,6 +46,7 @@ class Settings:
     
     def increase_speed(self):
         """Increase the speed of the game."""
-        self.enemy_speed *= self.speedup_scale
+        self.enemy_speed_x *= self.speedup_scale
+        self.enemy_speed_y *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.kill_score = int(self.kill_score * self.score_scale)
