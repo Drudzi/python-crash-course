@@ -60,6 +60,7 @@ class SidewaysShooter:
         """Respond to user inputs."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.stats.save_high_score()
                 sys.exit()
             
             elif event.type == pygame.KEYDOWN:
@@ -141,6 +142,7 @@ class SidewaysShooter:
         elif event.key == pygame.K_DOWN:
             self.spaceship.moving_down = True
         if event.key == pygame.K_q:
+            self.stats.save_high_score()
             sys.exit()
         if event.key == pygame.K_SPACE:
             self._fire_bullet()
