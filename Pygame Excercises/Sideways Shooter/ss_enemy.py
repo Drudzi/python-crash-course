@@ -32,10 +32,9 @@ class Enemy(Sprite):
         self.rect.x = self.x
         self.y = randint(y_spawn_range_a, y_spawn_range_b)
         self.rect.y = self.y
-        self.initial_y = self.y    
+        self.initial_y = self.y 
 
-    def update(self):
-        
+    def update(self):       
 
         self.x -= self.settings.enemy_speed_x
         self.rect.x = int(self.x)

@@ -11,7 +11,7 @@ class Settings:
         self.background_color = (255, 255, 255)
 
         self.difficulty = 'easy'
-        self.speedup_scale = 1.1
+        self.speedup_scale = 1.05
         self.score_scale = 1.5
 
         #Spaceship settings:

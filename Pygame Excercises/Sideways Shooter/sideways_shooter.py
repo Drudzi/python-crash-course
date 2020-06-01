@@ -84,6 +84,8 @@ class SidewaysShooter:
             self.stats.game_active = True
 
             self.scoreboard.prep_score()
+            self.scoreboard.prep_level()
+            self.scoreboard.prep_ships()
             
             self.enemies.empty()
             self.bullets.empty()
@@ -102,15 +104,15 @@ class SidewaysShooter:
 
         if easy_click and not self.stats.game_active:
             self.settings.difficulty = 'easy'
-            self.settings.speedup_scale = 1.1
+            self.settings.speedup_scale = 1.05
         
         elif medium_click and not self.stats.game_active:
             self.settings.difficulty = 'medium'
-            self.settings.speedup_scale = 1.2
+            self.settings.speedup_scale = 1.10
         
         elif hard_click and not self.stats.game_active:
             self.settings.difficulty = 'hard'
-            self.settings.speedup_scale = 1.3
+            self.settings.speedup_scale = 1.15
     
     def _active_difficulty_text_color(self):
         """Set the appropriate text color on the diff-buttons."""
@@ -222,6 +224,7 @@ class SidewaysShooter:
         """Respond to the spaceship getting hit by an enemy."""
         if self.stats.spaceships_used < self.settings.spaceship_limit:
             self.stats.spaceships_used += 1
+            self.scoreboard.prep_ships()
 
             self.enemies.empty()
             self.bullets.empty()
