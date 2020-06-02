@@ -4,14 +4,14 @@ from pygame.sprite import Sprite
 class SpaceShip(Sprite):
     """A class manage the spaceship in the game."""
 
-    def __init__(self, game_instance):
+    def __init__(self, game_instance, image):
         """Initialize attributes of the spaceship."""
         super().__init__()
         self.screen = game_instance.screen
         self.screen_rect = game_instance.screen.get_rect()
         self.settings = game_instance.settings
         
-        self.image = pygame.image.load('spaceship.bmp')
+        self.image = pygame.image.load(image)
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
 
@@ -24,10 +24,10 @@ class SpaceShip(Sprite):
     
     def update(self):
         """Update the position of the spaceship."""
-        if self.moving_up:
+        if self.moving_up and self.rect.top > self.screen_rect.top:
             self.y -= self.settings.spaceship_speed
         
-        if self.moving_down:
+        if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
             self.y += self.settings.spaceship_speed
 
         self.rect.y = self.y

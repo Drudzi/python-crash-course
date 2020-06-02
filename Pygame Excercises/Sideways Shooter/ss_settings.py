@@ -11,7 +11,7 @@ class Settings:
         self.background_color = (255, 255, 255)
 
         self.difficulty = 'easy'
-        self.speedup_scale = 1.05
+        self.speedup_scale = 1.08
         self.score_scale = 1.5
 
         #Spaceship settings:
@@ -42,7 +42,7 @@ class Settings:
         self.bullet_speed = 1.0
         self.spaceship_speed = 0.9
 
-        self.kill_score = 100
+        self.kill_score = 20
     
     def increase_speed(self):
         """Increase the speed of the game."""

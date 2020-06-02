@@ -29,7 +29,7 @@ class SidewaysShooter:
         self.stats = GameStats(self)
         self.scoreboard = ScoreBoard(self)
 
-        self.spaceship = SpaceShip(self)
+        self.spaceship = SpaceShip(self, 'spaceship.bmp')
 
         self.bullets = pygame.sprite.Group()
         
@@ -55,6 +55,25 @@ class SidewaysShooter:
                 self._update_enemies()
             
             self._update_screen()
+    
+    def _restart_game(self):
+        """Reset and restart the game."""
+        self.settings.initialize_dynamic_settings()
+        self.stats.reset_stats()
+        self.stats.game_active = True
+
+        self.scoreboard.prep_score()
+        self.scoreboard.prep_level()
+        self.scoreboard.prep_ships()
+            
+        self.enemies.empty()
+        self.bullets.empty()
+            
+        self._create_fleet()
+            
+        self.spaceship.center_spaceship()
+
+        pygame.mouse.set_visible(False)
 
     def _check_events(self):
         """Respond to user inputs."""
@@ -78,23 +97,7 @@ class SidewaysShooter:
         """Resond to the play-button being clicked."""
         click = self.play_button.rect.collidepoint(mouse_pos)
         if click and not self.stats.game_active:
-            
-            self.settings.initialize_dynamic_settings()
-            self.stats.reset_stats()
-            self.stats.game_active = True
-
-            self.scoreboard.prep_score()
-            self.scoreboard.prep_level()
-            self.scoreboard.prep_ships()
-            
-            self.enemies.empty()
-            self.bullets.empty()
-            
-            self._create_fleet()
-            
-            self.spaceship.center_spaceship()
-
-            pygame.mouse.set_visible(False)
+            self._restart_game()
     
     def _check_difficulty_buttons(self, mouse_pos):
         """Resond to clicks on diff-buttons."""
@@ -104,15 +107,15 @@ class SidewaysShooter:
 
         if easy_click and not self.stats.game_active:
             self.settings.difficulty = 'easy'
-            self.settings.speedup_scale = 1.05
+            self.settings.speedup_scale = 1.08
         
         elif medium_click and not self.stats.game_active:
             self.settings.difficulty = 'medium'
-            self.settings.speedup_scale = 1.10
+            self.settings.speedup_scale = 1.16
         
         elif hard_click and not self.stats.game_active:
             self.settings.difficulty = 'hard'
-            self.settings.speedup_scale = 1.15
+            self.settings.speedup_scale = 1.22
     
     def _active_difficulty_text_color(self):
         """Set the appropriate text color on the diff-buttons."""
@@ -148,6 +151,9 @@ class SidewaysShooter:
             sys.exit()
         if event.key == pygame.K_SPACE:
             self._fire_bullet()
+        if event.key == pygame.K_p:
+            if not self.stats.game_active:
+                self._restart_game()
 
     def _check_keyup_events(self, event):
         """Check if key has been released."""

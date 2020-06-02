@@ -56,7 +56,7 @@ class ScoreBoard:
     def prep_ships(self):
         self.spaceships = Group()
         for ship_num in range(self.settings.spaceship_limit - self.stats.spaceships_used):
-            spaceship = SpaceShip(self.game_instance)
+            spaceship = SpaceShip(self.game_instance, 'spaceship_small.bmp')
             #Set pos:
             spaceship.rect.bottom = self.screen_rect.bottom - 20
             spaceship.rect.centerx = (
