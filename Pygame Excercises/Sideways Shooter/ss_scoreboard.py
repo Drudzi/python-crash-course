@@ -58,7 +58,7 @@ class ScoreBoard:
         for ship_num in range(self.settings.spaceship_limit - self.stats.spaceships_used):
             spaceship = SpaceShip(self.game_instance, 'spaceship_small.bmp')
             #Set pos:
-            spaceship.rect.bottom = self.screen_rect.bottom - 20
+            spaceship.rect.bottom = self.screen_rect.bottom - 7
             spaceship.rect.centerx = (
                 (self.screen_rect.centerx - spaceship.rect.width - 20) + ship_num * spaceship.rect.width * 1.2)
             

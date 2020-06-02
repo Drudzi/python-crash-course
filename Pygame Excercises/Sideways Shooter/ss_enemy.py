@@ -25,8 +25,8 @@ class Enemy(Sprite):
         x_spawn_range_a = (self.settings.enemy_spawn_delay + self.screen_rect.width)
         x_spawn_range_b = (self.screen_rect.width * 2)
         
-        y_spawn_range_a = self.height
-        y_spawn_range_b = (self.screen_rect.height - self.height * 2)
+        y_spawn_range_a = self.height / 2
+        y_spawn_range_b = (self.screen_rect.height - self.height * 1.5)
         
         self.x = randint(x_spawn_range_a, x_spawn_range_b)
         self.rect.x = self.x
