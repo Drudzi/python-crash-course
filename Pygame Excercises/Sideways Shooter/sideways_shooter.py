@@ -19,7 +19,7 @@ class SidewaysShooter:
         """Initialize the game and create its resources."""
         pygame.init()
 
-        self.fps = 120
+        self.fps = 330
         self.fps_clock = pygame.time.Clock()
         self.settings = Settings()
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
@@ -47,6 +47,7 @@ class SidewaysShooter:
         """Method including the main game loop. Runs the game."""
         
         while True:
+            self.fps_clock.tick(self.fps)
             self._check_events()
             
             if self.stats.game_active:
