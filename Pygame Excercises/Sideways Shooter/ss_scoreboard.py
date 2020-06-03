@@ -16,7 +16,7 @@ class ScoreBoard:
         self.screen_rect = self.screen.get_rect()
 
         self.text_color = (10, 10, 10)
-        self.font = pygame.font.SysFont(None, 40)
+        self.font = pygame.font.SysFont('Calibri', 40)
 
         self.prep_score()
         self.prep_level()

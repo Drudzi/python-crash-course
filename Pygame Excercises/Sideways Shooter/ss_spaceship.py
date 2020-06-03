@@ -13,6 +13,9 @@ class SpaceShip(Sprite):
         
         self.image = pygame.image.load(image)
         self.image.set_colorkey((255, 255, 255))
+        if image == 'spaceship_small.bmp':
+            self.image.set_alpha(150)
+
         self.rect = self.image.get_rect()
 
         self.rect.midleft = self.screen_rect.midleft

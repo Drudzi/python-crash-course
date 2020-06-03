@@ -1,4 +1,4 @@
-import sys, cProfile
+import sys
 from random import randint
 from time import sleep
 
@@ -19,7 +19,7 @@ class SidewaysShooter:
         """Initialize the game and create its resources."""
         pygame.init()
 
-        self.fps = 330
+        self.fps = 333
         self.fps_clock = pygame.time.Clock()
         self.settings = Settings()
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))

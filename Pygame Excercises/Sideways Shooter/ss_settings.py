@@ -7,8 +7,7 @@ class Settings:
         """Initialize settings."""
         self.screen_width = 1100
         self.screen_height = 734
-        self.background_image = pygame.image.load('sky_background.bmp')
-        self.background_color = (255, 255, 255)
+        self.background_color = (250, 250, 250)
 
         self.difficulty = 'easy'
         self.speedup_scale = 1.08

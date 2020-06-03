@@ -25,7 +25,7 @@ class Button:
 
         self.button_color = button_color
         self.text_color = (255, 255, 255)
-        self.font = pygame.font.SysFont(None, font_size)
+        self.font = pygame.font.SysFont('Calibri', font_size)
         self.rect = pygame.Rect(0, 0, self.width, self.height)
 
         self._set_x(type)
