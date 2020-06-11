@@ -8,17 +8,17 @@ die_1 = Die(8)
 die_2 = Die(8)
 
 # Make some rolls and store results in a list:
-results = []
-for roll in range(50_000):
-    result = die_1.roll() + die_2.roll()
-    results.append(result)
+results = [die_1.roll() + die_2.roll() for roll in range(50_000)] #LIST COMPREHENSION
+# for roll in range(50_000):
+#     result = die_1.roll() + die_2.roll()
+#     results.append(result)
 
 # Analyze the results:
-frequencies = []
 max_result = die_1.num_sides + die_2.num_sides
-for value in range(2, max_result+1):
-    frequency = results.count(value)
-    frequencies.append(frequency)
+frequencies = [results.count(value) for value in range(2, max_result+1)] #LIST COMPREHENSION
+# for value in range(2, max_result+1):
+#     frequency = results.count(value)
+#     frequencies.append(frequency)
 
 # Visualize the results:
 x_values = list(range(2, max_result+1)) 
