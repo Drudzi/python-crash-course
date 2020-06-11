@@ -3,10 +3,9 @@ from plotly import offline
 
 from die import Die
 
-#Dice are named for their number of sides... D6, D8, D10 and so on.
-# Create a D6 and a D10:
-die_1 = Die()
-die_2 = Die(10)
+# Create two D8 dice:
+die_1 = Die(8)
+die_2 = Die(8)
 
 # Make some rolls and store results in a list:
 results = []
@@ -35,10 +34,10 @@ x_axis_config = {'title': 'Result', 'dtick': 1} #dtick controls spacing between 
 y_axis_config = {'title': 'Frequency of Result'}
 #In plotly, each axis can be configured in multiple ways and configurations for an axis...
 # should be stored in a dictionary.
-my_layout = Layout(title='Results of rolling a D6 and a D10 50.000 times',
+my_layout = Layout(title='Results of rolling two D8 dice 50.000 times',
     xaxis=x_axis_config, yaxis=y_axis_config) #We insert the axis configs.a
 
-offline.plot({'data': data, 'layout': my_layout}, filename='d6_d10.html')
+offline.plot({'data': data, 'layout': my_layout}, filename='d8_d8.html')
 #offline.plot is used to generate the plot.
 # It needs a dictionary containing the data and layout objects.
 #  You can also specify a filename for the file where the graph will be saved.
