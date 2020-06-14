@@ -12,13 +12,18 @@ die_2 = Die()
 results = [die_1.roll() + die_2.roll() for roll in range(10_000)]
 
 # Analyze results:
-max_result = die_1.roll() + die_2.roll()
+max_result = die_1.num_sides + die_2.num_sides
 frequencies = [results.count(value) for value in range(2, max_result+1)]
 x_values = list(range(2, max_result+1))
 
 #Visualize results:
-plt.style.use('classic')
+plt.style.use('seaborn')
 fig, ax = plt.subplots(figsize=(10, 6))
-ax.hist(x=x_values, bins=[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], data=frequencies)
+
+ax.bar(x_values, frequencies)
+ax.set_xticks(x_values)
+ax.set_title('Results of rolling two D6 dice 10.000 times', fontsize=20)
+ax.set_xlabel('Result', fontsize=14)
+ax.set_ylabel('Frequency', fontsize=14)
 
 plt.show()
