@@ -8,18 +8,11 @@ import matplotlib.pyplot as plt
 filename = 'data/sitka_weather_2018_simple.csv'
 with open(filename) as f:
     reader = csv.reader(f) #We assign a csv.reader object to reader, which reads the csv.
-    header_row = next(reader)
-    #The next() function returns the next line in the csv when a reader object is passed.
-    #We only call it once, which gives is the headers which contain meaningful information about the data.
-    #The reader object takes all csv's in a line and stores them in a list.
+    header_row = next(reader) #We skip the header row.
 
-    # Get dates and high temperatures from this file:
-    dates, highs = [], []
-    for row in reader:
-        #Looping through all the remaining rows of the csv file associated with the reader object.
-        # It continues from where it left off, meaning it won't include the header in the highs list.
-        #  row will always be a list of values from the csv file.
-        
+    # Get dates, and high and low temperatures from this file:
+    dates, highs, lows = [], [], []
+    for row in reader:        
         current_date = datetime.strptime(row[2], '%Y-%m-%d')
         #We use the datetime module and its strptime to convert the dates...
         # from string to an objects representing the dates.
@@ -27,18 +20,27 @@ with open(filename) as f:
         #   The second argument should tell Python how the date is formatted.
         #    #See documentation or table 16-1.
 
-        high = int(row[5]) #Pulling the 5th value (max temp) from the row and converting it from str to numerical (integer).
+        high = int(row[5])
+        low = int(row[6])
+
         dates.append(current_date)
         highs.append(high)
-        #Now, we have the max temps and the dates stored!
+        lows.append(low)
+        #Now, we have the max temps, low temps and the dates stored!
 
 # Plot the high temperatures:
 plt.style.use('seaborn')
 fig, ax = plt.subplots()
-ax.plot(dates, highs, c='red') #Without any input values (x), it starts off at 0. Dates contains our input values.
+ax.plot(dates, highs, c='red', alpha=0.6) #Without any input values (x), it starts off at 0. Dates contains our input values.
+ax.plot(dates, lows, c='blue', alpha=0.6) #We make a new plot of the low temps. Alpha controls transparency.
+plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
+#fill_between is used to determine the range between datasets, and we'll give that area some color.
+# It needs a set of x values and two sets of y values to fill the space between.
+#  facecolor parameter controls the color of the region.
+#   This shading helps the range between the data sets become more apparent.
 
 # Format plot:
-plt.title("Daily high temperatures - 2018", fontsize=24)
+plt.title("Daily high and low temperatures - 2018", fontsize=24)
 plt.xlabel('', fontsize=16)
 fig.autofmt_xdate() #autofmt_xdate() draws the labels diagonally to prevent them from overlapping.
 plt.ylabel("Temperature (F)", fontsize=16)
