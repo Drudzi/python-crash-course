@@ -1,3 +1,5 @@
+# Comparing two places and scaling the y-ranges.
+
 from datetime import datetime
 import csv
 
