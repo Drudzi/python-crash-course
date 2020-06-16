@@ -20,7 +20,7 @@ with open(filename) as f:
         #   The second argument should tell Python how the date is formatted.
         #    #See documentation or table 16-1.
 
-        high = int(row[5])
+        high = float(row[5])
         low = int(row[6])
 
         dates.append(current_date)
@@ -31,8 +31,8 @@ with open(filename) as f:
 # Plot the high temperatures:
 plt.style.use('seaborn')
 fig, ax = plt.subplots()
-ax.plot(dates, highs, c='red', alpha=0.6) #Without any input values (x), it starts off at 0. Dates contains our input values.
-ax.plot(dates, lows, c='blue', alpha=0.6) #We make a new plot of the low temps. Alpha controls transparency.
+ax.plot(dates, highs, c='red', alpha=0.9) #Without any input values (x), it starts off at 0. Dates contains our input values.
+ax.plot(dates, lows, c='blue', alpha=0.9) #We make a new plot of the low temps. Alpha controls transparency.
 plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 #fill_between is used to determine the range between datasets, and we'll give that area some color.
 # It needs a set of x values and two sets of y values to fill the space between.
