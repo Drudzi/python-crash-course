@@ -13,21 +13,27 @@ with open(filename) as f:
         lats.append(float(row[0]))
         lons.append(float(row[1]))
         brights.append(float(row[2]))
+    
+for brightness in brights:
+    text = f"Brightness: {brightness}"
+    hover_texts.append(text)
 
 # Map the fires:
 data = [{
     'type': "scattergeo",
     'lon': lons,
     'lat': lats,
+    'text': hover_texts,
     'marker': {
-        'size': 2,
+        'size': [0.03*brightness for brightness in brights],
         'color': brights,
         'colorscale': "Inferno",
+        'reversescale': True,
         'colorbar': {'title': "Brightness"},
     }
 }]
 
-layout = Layout(title="Global Fires, last 7 days")
+layout = Layout(title="Global Fires, last 24 hours")
 
 fig = {'data': data, 'layout': layout}
 offline.plot(fig, filename='global_fires.html')
