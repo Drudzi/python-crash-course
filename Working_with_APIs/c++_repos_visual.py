@@ -4,7 +4,7 @@ from plotly.graph_objs import Bar
 from plotly import offline
 
 # Make an API call and store the response:
-url = 'https://api.github.com/search/repositories?q=language:python&sort=stars'
+url = 'https://api.github.com/search/repositories?q=language:c++&sort=stars'
 headers = {'Accept': 'application/vnd.github.v3+json'}
 r = requests.get(url, headers=headers)
 print(f"Status code: {r.status_code}")
@@ -51,7 +51,7 @@ data = [{
 #We use the dictionary-way to make a chart object with our data.
 
 layout = {
-    'title': "Most-Starred Python Projects on GitHub",
+    'title': "Most-Starred C++ Projects on GitHub",
     'titlefont': {'size': 24},
     'xaxis': {
         'title': 'Repository',
@@ -67,4 +67,4 @@ layout = {
 #We also use the dictionary-way to make our layout.
 
 fig = {'data': data, 'layout': layout}
-offline.plot(fig, filename="python_repos.html")
+offline.plot(fig, filename="c++_repos.html")
