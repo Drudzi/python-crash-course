@@ -1,0 +1,12 @@
+
+This is the specification for our web-application-project.
+A full spec details the project goals, describes the project's functionality and discusses its appearance and interface.
+Like any good project or business plan a spec should keep you focused and help keep your project on track.
+
+We won't write a fully detailed spec for this project.
+
+SPEC:
+We'll write a web app called Learning Log that allows users to log the topics they're interested in
+and to make journal entries as they learn about each topic.
+The Learning Log will describe the site and invite users to either register or log in.
+Once logged in, a user can create new topics, add new entries and read and edit existing entries.
