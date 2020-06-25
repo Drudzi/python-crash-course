@@ -9,6 +9,55 @@ SETTING UP A PROJECT:
 
         We set up a new directory (learning_log) for our project and use the venv module to setup a virtual env:
         In command promt, in the right directory, we enter the following to create a venv called ll_venv:
-        
-        python -m venv ll_venv
+            python -m venv ll_venv
 
+        We activate the env:
+            ll_env\Scripts\activate
+
+        Deactivate using 'deactivate' in cmd.
+
+    Installing Django:
+
+        pip install django
+        Keep in mind that Django will be available only when the ll_env is active.
+        Name of venv in parentheses in terminal shows that your venv is active.
+    
+    Creating a Project in Django:
+
+        Tell Django to setup a new project in console:
+            django-admin startproject learning_log .
+        
+        Don't forget the dot at the end,
+        it creates our project in a beneficial structure.
+
+        Django has created a new folder (directory) called learning_log containing some py-files and manage.py.
+    
+    Creating the Database:
+
+        Django stores most information in a database, we create one in console using the manage.py:
+            python manage.py migrate
+
+        Modifying a database is called migrating.
+        When entering migrate command first time, it creates an SQLite database for us.
+
+    Viewing the Project:
+
+        Using...
+            python manage.py runserver
+        Django starts a development server, so you can view your project on your system to see how it works.
+
+        You can see if there were any issues and Django will give you the localhost URL as well.
+
+STARTING AN APP:
+
+    Django projects are individual apps that are working together to create a whole.
+    For now, we'll use one app to do most of the work.
+    When the server is running and we are in the venv, we create a new app in console:
+        python manage.py startapp learning_logs
+    
+    Command startapp 'appname' tells Django to create the infrastructure needed to create an app.
+    It creates it in a new folder called learning_logs, in this case.
+
+    Defining Models:
+
+        ...
