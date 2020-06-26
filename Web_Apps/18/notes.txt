@@ -55,9 +55,18 @@ STARTING AN APP:
     When the server is running and we are in the venv, we create a new app in console:
         python manage.py startapp learning_logs
     
-    Command startapp 'appname' tells Django to create the infrastructure needed to create an app.
+    Command "startapp 'appname'" tells Django to create the infrastructure needed to create an app.
     It creates it in a new folder called learning_logs, in this case.
 
     Defining Models:
 
-        ...
+        Models are what Django uses to access and manage data. They are in models.py.
+        Models are just classes using the Django models module, they tell Django how to work with the data.
+
+        In our case we'll need our user to create a number of topics in their learning log.
+        Each entry they make will be tied to a topic and these topics will be displayed as text.
+        We'll also need to store the timestamp for each entry, so we can show users when they made each entry.
+
+        Check models.py.
+        https://docs.djangoproject.com/en/2.2/ref/models/fields/
+        
