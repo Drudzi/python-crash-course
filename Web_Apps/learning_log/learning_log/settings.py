@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # My apps:
+    'learning_logs',
+    #Here we add our own apps for the project, it's helpful to organize them in groups like this.
+    # It's important to place your own apps before the default if you need to override their behaviour.
+    
+    # Default Django apps:
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

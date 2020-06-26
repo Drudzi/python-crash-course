@@ -69,4 +69,37 @@ STARTING AN APP:
 
         Check models.py.
         https://docs.djangoproject.com/en/2.2/ref/models/fields/
+
+    Activating Models:    
         
+        To actually use our models, we need to manually tell Django to include them in the overall project.
+        In settings.py, in the INSTALLED_APPS list, you'll see which apps are installed and working together.
+        Add your apps as items in that list. (See settings.py)
+
+        Next we'll need to tell Django to modify the database so it can store information related to the models.
+        Run the following in console:
+            python manage.py makemigrations learning_logs
+
+            The makemigrations command tells Django to figure out how to store the data associated
+            with our new models in the database.
+            Will return something like the following:
+
+                Migrations for 'learning_logs':
+                    learning_logs\migrations\0001_initial.py
+                        - Create model Topic
+            
+        It creates an initial migration file, which needs to be applied using the migrate command:
+            python manage.py migrate
+
+            If run correctly, it should give this as in the last two lines:
+                Running migrations:
+                    Applying learning_logs.0001_initial... OK
+        
+        Whenever we want to modify Learning Log, we follow these THREE STEPS:
+            1. Modify models.py
+            2. Call makemigrations on learning_logs (the appname)
+            3. Run the 'manage.py migrate' command to apply and modify the database
+        
+    The Django Admin Site:
+
+        ...

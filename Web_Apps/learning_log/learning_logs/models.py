@@ -19,5 +19,9 @@ class Topic(models.Model):
     #  auto-set this attribute to the current date and time whenever the user creates a new topic, if True.
 
     def __str__(self):
+        #We tell Django which attribute to use by default when it displays info about a topic using __str__ method.
+        # Django calls a __str__ method to display a simple representation of a model.
         """Return a string representation of the model."""
         return self.text
+        #This __str__() returns the string stored in the text attribute.
+
