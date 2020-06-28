@@ -102,4 +102,46 @@ STARTING AN APP:
         
     The Django Admin Site:
 
+        The Django admin site lets administrators work with their models more easily.
+
+        Setting Up a Superuser:
+
+            Django lets you set up a superuser, who has all privileges available on the site.
+            Run the follwing in console and respond to the prompts to create a superuser:
+
+                python manage.py createsuperuser
+                    Username (leave blank to use 'jonat'): drudzi
+                    Email address: jonathan.r.axelsson@gmail.com
+                    Password: xxxxx
+                    Password (again): xxxxx
+                    Superuser created successfully.
+        
+        Registering a Model with the Admin Site:
+
+            The admin site doesn't include all models, our own models need to be added manually.
+            To register your own apps to the Django admin site, go to admin.py.
+            Reach the admin site through localhost:port/admin
+        
+        Adding topics:
+
+            Topics will be under Learning_Logs on the admin site.
+            We'll add Chess and Rock Climbing as topics to have some data to work with.
+
+    Defining the Entry Model:
+
+        For a user to record what they've been learning about their topics,
+        we need to define a model for the kinds of entries users can make in their learning logs.
+        Each entry needs to be associated with a certain topic.
+        This kind of relationship is called a many-to-one relationship,
+        meaning that many entries can be associated with one topic.
+
+        We place the Entry model-class in models.py.
+
+        Next, we'll migrate the Entry class like we did with the Topic class.
+        Also register it to the admin site in admin.py.
+
+        To get some more data to work with, we add three entries, two for chess and one for climbing.
+    
+    The Django Shell:
+
         ...

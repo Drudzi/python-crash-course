@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Topic(models.Model):
-    #Our first model is called Topics, inheriting from Model-class from models module.
+    #Our first model is called Topic, inheriting from Model-class from models module.
     # It defines a models basic functionality.
 
     """A topic the user is learning about."""
@@ -25,3 +25,36 @@ class Topic(models.Model):
         return self.text
         #This __str__() returns the string stored in the text attribute.
 
+
+class Entry(models.Model):
+    """Something specific learned about a topic."""
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    #We assign the topic attribute a ForeignKey instance.
+    # A "foreign key" is a database term, a reference to another record in the database.
+    #  The foreign key is what connects each entry to a specific topic.
+    #   Whenever a Topic is created, it's associated with a key or an ID.
+    #    When Django connects two pieces of data, it uses the keys associated with each piece of info.
+    #The second argument 'on_delete=models.CASCADE' tells Django that...
+    # when a Topic is deleted, it should also delete all the entries associated with that topic.
+    #  This kind of delete is generally called a "cascading delete".
+
+    text = models.TextField()
+    #The text attribute is an instance of TextField, which is a field without any limits.
+
+    date_added = models.DateTimeField(auto_now_add=True)
+    #Like in the Topics model, we use the DateTimeField to record when an entry is created.
+    # We'll use this to sort entries and display creation date.
+
+    class Meta:
+        verbose_name_plural = 'entries'
+        #Here we nest a Meta-class inside our model-class.
+        # The Meta class holds extra information for managing a model.
+        #  verbose_name_plural allows us to set a special name when the model is referred to in plural.
+        #   This tells Django to use Entries instead of Entrys as it would do by default.
+
+    def __str__(self):
+        """Return a string representation of the model."""
+        return f"{self.text[:50]}..."
+        #The __str__ method tells Django which information to show when it refers to individual entries,
+        # and because an entry can be a long text, we only display the first 50 characters.
+        #  We also add the three dots at the end (called ellipsis) to clarify it's probably longer.
