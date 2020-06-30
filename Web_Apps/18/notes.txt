@@ -144,4 +144,44 @@ STARTING AN APP:
     
     The Django Shell:
 
-        ...
+        The Django Shell is an interactive environment where we can examine our data
+        programmatically. This environment is great for testing and troubleshooting your projects.
+
+        python manage.py shell
+            This command runs the Django shell.
+        
+        When entered in a venv it launches a Python interpreter which allows you to 
+        explore the data stored in your project's database.
+
+        >>> from learning_logs.models import Topic, Entry
+        >>> topics = Topic.objects.all()
+            Topic.objects.all() returns a type of list called queryset of all the Topic instances:
+            <QuerySet [<Topic: Chess>, <Topic: Rock Climbing>]>
+        
+        >>> for topic in topics:
+        ...   print(topic.id, topic)
+        1 Chess
+        2 Rock Climbing
+            The for loop runs through the topics queryset, the id returns the index/id of the instance.
+            We can clearly see that Chess has ID of 1 and Climbing an ID of 2.
+        
+        If you know the ID of an object, you can use Topic.objects.get(id=x) to examine it:
+        >>> topic = Topic.objects.get(id=1)
+        >>> topic.text
+        'Chess'
+        >>> topic.date_added
+        datetime.datetime(2019, 2, 19, 1, 55, 31, 98500, tzinfo=<UTC>)
+
+        You can also use ForeignKeys, connections between models.
+        In our case, entries are connected to a specific topic.
+        >>> topic.entry_set.all()
+            Use this formula: model(lowercase).model(lowercase)_set.all()
+        
+        From the code above, we get a queryset of the entries connected to the topic.
+
+        NOTE:
+        Each time you modify your models, you'll need to restart the shell to see the changes.
+        Press CTRL-Z and ENTER to exit a shell or exit().
+
+        More on queries and Django shell:
+        https://docs.djangoproject.com/en/3.0/topics/db/queries/
