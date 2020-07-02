@@ -14,8 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('learning_logs.urls')),
 ]
+
+#In the projects main urls.py file, urlpatterns variable includes:
+# Sets of URLs from the apps in the project.
+#  We add the second item in urlpatterns to include URLs for learning_logs app.
+#   After this we need to make a new urls.py file inside the app folder to define its URLs.

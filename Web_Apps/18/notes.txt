@@ -185,3 +185,78 @@ STARTING AN APP:
 
         More on queries and Django shell:
         https://docs.djangoproject.com/en/3.0/topics/db/queries/
+
+MAKING PAGES: The Learning Log Home Page:
+
+    Making web pages with Django consists of three steps:
+        Defining URL patterns
+        Writing views
+        Writing templates
+    
+        Order doesn't matter but we'll do it in the order above.
+
+    A URL pattern describes the way the URL is laid out.
+    It tells Django what to look for when matching a browser request with a site's URL...
+    so it knows which page to return.
+
+    Each URL maps to a certain VIEW, which is a function that 
+    retrieves and processes the data needed for that page.
+
+    These views often render the page using a TEMPLATE, which contains the overall structure of the page.
+
+    Mapping a URL:
+
+        Users request pages by entering URLs into a browser and clicking links,
+        so we need to decide what URLs are needed for our site.
+
+        We include our app-URLs in the main urls.py and then define the apps' URLs in their own urls.py.
+        See the comments in urls.py.
+
+    Writing a View:
+
+        A view function takes in information about a request, prepares the data needed to generate
+        that page, and then sends the data back to the browser, often by using a template
+        that defines what the page will look like.
+
+        We write our index-view-function inside views.py.
+        See views.py.
+    
+    Writing a Template:
+
+        The template defines what the page should look like,
+        and Django fills in the relevant data each time the page is requested.ä
+        A template allows you to access any data provided by the view.
+        Because our view-func for the home page provided no data, this template will be simple.
+
+        We'll set up a templates-folder inside the app-directory (learning_logs).
+        Kind of weirdly we will also set up a new folder in templates called learning_logs.
+        This might seem a little redundant, but it sets up a beneficial structure for Django.
+
+        After our templates folder is set up, we'll create the actual template file inside
+        the inner learning_logs folder and we'll name it index.html.
+
+        It's a very simple file, it looks like this:
+            <p>Learning Log</p>
+
+            <p>Learning Log helps you keep track of your learning, for any 
+            topic you're learning about.</p>
+
+        It's HTML code. <p></p> signifies paragraphs. <p> opens it and </p> closes it.
+
+        Now, when you run the server and go to the base URL, you'll see this simple page using index.html template.
+
+BUILDING ADDITIONAL PAGES:
+
+    ...
+
+    Template Inheritance:
+
+        ...
+
+        The Parent Template:
+
+            ...
+        
+        The Child Template:
+
+            ...
