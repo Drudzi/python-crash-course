@@ -247,15 +247,34 @@ MAKING PAGES: The Learning Log Home Page:
 
 BUILDING ADDITIONAL PAGES:
 
-    ...
+    Now that we understand and have established a routine for building pages,
+    we'll start building out our Learning Log.
+
+    Next we'll build two pages that both display data.
+        A page that lists all topics and a page that shows the entries for a certain topic.
+
+    We'll use our regular page-building routine, except that we'll create a base template,
+    that all templates in the project can inherit from.
 
     Template Inheritance:
 
-        ...
+        When building a website, some elements will always need to be repeated on each page.
+        Rather than writing these elements directly into each page,
+        you can write a base template containing the repeated elements
+        and then have each page inherit from the base template.
+
+        "This approach lets you focus on developing the unique aspects of each page,
+        and makes it much easier to change the overall look and feel of the project."
 
         The Parent Template:
 
+            We'll create our base.html template in the same directory as our other templates:
             ...
+            <p>
+            <a href="{% url 'learning_logs:index' %}">Learning Log</a>
+            </p>
+
+            {% block content %}{% endblock content}
         
         The Child Template:
 
