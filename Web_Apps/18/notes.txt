@@ -269,13 +269,61 @@ BUILDING ADDITIONAL PAGES:
         The Parent Template:
 
             We'll create our base.html template in the same directory as our other templates:
-            ...
+            
             <p>
             <a href="{% url 'learning_logs:index' %}">Learning Log</a>
             </p>
 
             {% block content %}{% endblock content}
+
+                The HTML paragraph contains an anchor tag, which is used to set a custom name for a link.
+                Kind of like covering your link with another name.
+                The href, which holds the actual URL is a template tag, indicated by
+                braces and percent signs. 
+                A template tag generates information to be displayed on a page.
+                {% url 'learning_logs:index' %} generates a URL matching the URL found
+                in learning_logs/urls.py with the name index.
+                The template tag can find the learning_logs namespace due to the 'app_name'
+                variable we defined in its urls.py.
+
+                Using a template tag like this is efficient, because it will update automatically
+                if we change the URL in urls.py.
+
+                Now, each page inheriting from this base template will have a link to the home page.
+
+                {% block content %}{% endblock content} is a pair of block tags.
+                This block, called content is a placeholder for a block of content: 
+                the child template will define what information goes in here.
+                Note that child templates don't have to define every block from its parent.
+                You can reserve as many blocks in your parent templates as you'd like.
         
         The Child Template:
+
+            index.html will now be a child template to base.html:
+
+                {% extends "learning_logs/base.html" %}
+
+                {% block content %}
+                  <p>Learning Log helps you keep track of your learning, for any 
+                  topic you're learning about.</p>
+                {% endblock content %}
+            
+            {% extends "learning_logs/base.html" %} is the first line and it's the code
+            that tells it to inherit from the base template.
+            A child template must have an extends tag with a template to inherit from.
+            It allows the child to define the reserved blocks.
+
+            Next, we define what's in the content block using a pair of block tags.
+            Note that the content inside blocks should be indented, in HTML most common is 2 spaces.
+            Also note that endblocks don't need a block name, but it makes it readable.
+
+        Using template inheritance will make your life easier. Much so.
+        It simplifies each unique page and it's easier to make consistent changes.
+    
+    The Topics Page:
+
+        Let's create the Topics page, which shows users what Topics they have created.
+
+        The Topics URL Pattern:
 
             ...
