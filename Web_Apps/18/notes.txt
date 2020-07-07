@@ -326,4 +326,15 @@ BUILDING ADDITIONAL PAGES:
 
         The Topics URL Pattern:
 
-            ...
+            We define the Topics URL in learning_logs/urls.py and set it to 'topics'.
+        
+        The Topics View:
+
+            We'll create a 'topics' function in views.py which needs to retrieve some data
+            from the database and send it to the template.
+            See learning_logs/views.py.
+        
+        The Topics Template:
+
+            The topics template will recieve the context dictionary from our topics() in views.py.
+            We'll make the template file in templates/learning_logs and name it topics.html.
