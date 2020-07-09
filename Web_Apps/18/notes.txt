@@ -338,3 +338,56 @@ BUILDING ADDITIONAL PAGES:
 
             The topics template will recieve the context dictionary from our topics() in views.py.
             We'll make the template file in templates/learning_logs and name it topics.html.
+
+            ...
+            {% extends "learning_logs/base.html" %}
+
+            {% block content %}
+
+              <p>Topics</p>
+
+              <ul>
+                {% for topic in topics %}
+                  <li>{{ topic }}</li>
+                {% empty %}
+                  <li>No topics have been added yet.</li>
+                {% endfor %}
+              </ul>
+
+            {% endblock content %}
+            ...
+
+            On the first line, we inherit the template from the base template using extends...
+            Then we open the content-block and close it at the end.
+
+            Later we open a UL-tag, in which everthing will be displayed as items in a bullet list.
+            Inisde this UL-tag, we've got another template tag ({% %}) where we're running a for-loop.
+            It loops through the topics-list (queryset), which our topics-view provides via the context.
+
+            Notice that this template-code differs from Python. The for-loop, which is normally
+            closed using indentations in Python needs an explicit {% endor %}-tag in templates.
+            Like this:
+                {% for item in list %}
+                  do something with each item
+                {% endfor %}
+        
+            In the loop, we want to turn every topic into an item in the bulleted list.
+            The topic will be assigned to the varaible topic, and to use a variable in a template
+            we wrap them in double-braces, which tells Django it's a variable we want to display.
+            Like this:
+                {{ variable }}
+            
+            We'll write this {{ variable }} inside an <li>-tag, a list item.
+            Anything passed in between an li-tag will appear as a bulleted item if inside a UL-tag.
+
+            Then, the {% empty %} template-tag, tells Django what to do if the given list is empty.
+            If that's the case we'll display a message giving the user that information.
+
+            The last step for completing this page is to add a link to the topics page
+            in the base template.
+            We do it the same way as we did when adding the Learning Log home page link.
+            We use a {% url %} template tag inside an anchor-tag.
+        
+    Individual Topic Pages:
+
+        ...
