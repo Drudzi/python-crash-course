@@ -27,3 +27,25 @@ def topics(request):
     return render(request, 'learning_logs/topics.html', context)
     #When we're building a page that requires data, we also pass our context attribute
     # to the render function as our third argument.
+
+def topic(request, topic_id):
+    """Show a single topic and all its entries."""
+    #Our first view with a parameter other than request.
+    # It will retrieve the integer stored in topic_id from the URL-pattern.
+
+    topic = Topic.objects.get(id=topic_id)
+    #Here we'll assign the topic-object assigned to the topic-id from the URL...
+    # using the same method we used in the Django shell.
+    #  The get() function gives us the topic we're currently working with.
+
+    entries = topic.entry_set.order_by('-date_added')
+    #We also need the entries associated with the current topic.
+    # Once again, we recieve them using the same method as we did in the Django shell.
+    #  To get them sorted by latest first, we use the order_by() function...
+    #   and give it the date_added attribute, which sorts them by date added.
+    #    The minus sign in front of date_added reverses the order, so the most recent come first. 
+
+    context = {'topic': topic, 'entries': entries}
+    #We enter the attributes above to the context, which let's us reach them from the template-file.
+
+    return render(request, 'learning_logs/topic.html', context)

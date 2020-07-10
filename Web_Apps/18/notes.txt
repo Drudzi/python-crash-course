@@ -390,4 +390,35 @@ BUILDING ADDITIONAL PAGES:
         
     Individual Topic Pages:
 
-        ...
+        The next step is to create a page that can focus on a single topic.
+        We want this page to show the name of the current topic, and its entries.
+        We'll also change the bulleted topics on the topics page so they link to
+        their corresponding individual topic page.ä
+
+        The Topic URL Pattern:
+
+            This URL will be a little different to the earlier URLs we've defined.
+            It will need to use the topic's id-attribute to indicate which topic was requested.
+
+            ...
+            path('topics/<int:topic_id>/', views.topic, name='topic')
+            ...
+
+            Let's look at the first argument above, where we define the URL.
+            The first part of the string (topics) tells Django to look for URLs with
+            the word 'topics' after the base URL.
+            The second part, <int:topic_id> searches for an integer which it will store in
+            an argument called topic_id.
+
+            When Django finds a URL request matching this pattern, it will call the associated
+            view-function topic() in views.py with the topic_id argument.
+            In the view function, we'll use the topic_id argument to get the correct
+            topic inside the function.
+
+        The Topic View:
+
+            We create the topic() function inside views.py.
+        
+        The Topic Template:
+
+            ...
