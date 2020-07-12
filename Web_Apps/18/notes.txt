@@ -421,4 +421,71 @@ BUILDING ADDITIONAL PAGES:
         
         The Topic Template:
 
+            We write the template in topic.html.
+
             ...
+            {% extends 'learning_logs/base.html' %}
+
+            {% block content %}
+
+              <p>Topic: {{ topic }}</p>
+
+              <p>Entries:</p>
+              <ul>
+              {% for entry in entries %}
+                <li>
+                  <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
+                  <p>{{ entry.text|linebreaks }}</p>
+                </li>
+              {% empty %}
+                <li>There are no entries for this topic yet.</li>
+              {% endfor %}
+              </ul>
+
+            {% endblock content %}
+            ...
+
+            We start by extending the template from the base template, like usual.
+            Then we display the current topic using the topic-variable we defined in the context.
+
+            Next, we start a UL-tag, which displays items in a bullet-list.
+            We want to display our entries, so we create a for loop of our entries-set from the context.
+
+            The first thing we do inside the for-loop is to start a new list item tag, which will be a bullet.
+            Each bullet will list two pieces of information, first the timestamp and
+            then the full text of each entry.
+                
+                In the first paragraph, we get the date_added attribute from each item in the entries set.
+                The vertical line afterwards indicates a template filter,
+                which is a function that modifies the value in a template variable.
+                For the timestamp, we'll use the date-filter to format the displayed output.
+                
+                    date:'M d, Y H:i' displays timestamps in the format January 1, 2020 15:00
+                
+                For the full text we use the linebreaks filter which ensures that long text
+                entries include line breaks in a format understood by browsers,
+                rather than showing a block of uninterrupted text.
+                
+                See more about filters and templates:
+                    https://docs.djangoproject.com/en/3.0/ref/templates/builtins/
+
+            We also include something for Django to display if the entries set is empty.
+
+        Links from the Topics Page:
+
+            We need to update the topics.html template so each topic links to the appropriate page.
+            Instead of writing only the topic-variable for every list item, we'll use
+            an anchor tag and a URL-tag to generate the proper link.
+            
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+
+            In the URL template tag, we first get the URL pattern with the name topic, which we defined.
+            This URL-pattern also requires a topic_id argument to link to the correct topic page.
+            The 'topic.id' will give it that, it returns the ID of the current topic as a numerical value.
+
+            PS.
+                Note that there is a difference between topic.id and topic_id.
+                'topic.id' examines a topic and returns the numerical value of the corresponding ID.
+                'topic_id' is a set variable referencing to that ID in the code.
+                Using these expressions in the wrong way can cause error, make sure
+                to use them correctly.

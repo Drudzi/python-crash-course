@@ -1,6 +1,15 @@
-<p>Yorker Pizza</p>
+{% extends "pizzas/base.html" %}
 
-<p>Welcome to your latest pizzeria!</p>
-<p>We've brought a new revolutionizing concept into the world of pizza.</p>
+{% block content %}
 
-<p>Taste us now.</p>
+  <p>Yorker Pizza</p>
+
+  <p>Welcome to your pizzeria!</p>
+  <p>We've brought a new revolutionizing concept into the world of pizza.</p>
+
+  <p>Taste us now.</p>
+  <p>
+      Check out our menu <a href="{% url 'pizzas:menu' %}">here</a>.
+  </p>
+
+{% endblock content %}
