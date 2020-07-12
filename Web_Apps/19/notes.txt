@@ -1,0 +1,114 @@
+ALLOWING USERS TO ENTER DATA:
+
+    Before building an authentication system for users to create accounts,
+    we'll add some pages allowing users to enter their own data.
+    They should have the ability to create topics, new entries and also edit entries.
+
+    Currently, only the superuser can do these things using the admin site
+    and we don't want users to interact with the admin site, so we'll use
+    Django's form-building tools to build pages allowing users to enter data.
+
+    Adding New Topics:
+
+        Let's begin with allowing users to create new topics.
+        Building a form-based page isn't much different to building the ones we already have,
+        the major difference is the addition of a new module called forms.py containing the forms.
+
+        The Topic ModelForm:
+
+            Any web page that let's users enter and submit information is called a form.
+            Whenever users enter information, we need to validate that information
+            to ensure it's the right kind of data and that it's not malicious (code interrupting our server).
+            
+            When we recieve information from a user, we need to process it and save the valid data
+            to the right place in our database. Django is good with this and automates much of this for us.
+
+            Using a ModelForm is the simplest way to build a form in Django.
+            A ModelForm using the data from our models in models.py to automatically create forms.
+
+            We'll write our first form in forms.py, which we create in the app directory.
+        
+        The new_topic URL:
+
+            Now we want to create a page where users can actually add new topics.
+            URLs should preferably be short and descriptive, so we'll use 'new_topic'.
+            We add this URL-pattern to learning_logs/urls.py and send the requests to
+            new_topic() in views.py, which we'll create next.
+        
+        The new_topic() View Function:
+
+            The view function for the new_topic page needs to handle two major situations:
+                
+                Initial requests for the new_topic page (in which case it should show a blank form)
+                and the processing of any data submitted in the form.
+                It should also redirect the user back to the topics page, when data from a
+                submitted form is processed.
+            
+            We create new_topic() in views.py.
+        
+        GET and POST Requests:
+
+            There are different kinds of requests, the two main types are GET and POST when building web apps.
+            GET requests are used for pages that only read data from the server.
+            POST request are usually used when a user needs to submit information through a form.
+
+            There are a few more types of requests but we won't use them for this project.
+
+            When the user initially requests the page, the browser will send a GET request.
+            But, once the user has filled out and submitted the form,
+            the browser will send a POST request.
+
+            By knowing what kind of request it is, we know whether the user requests
+            a blank form (GET) or asking us to process a completed form (POST).
+
+            See views.py and the new_topic function.
+        
+        The new_topic Template:
+
+            We'll create the new_topic.html template to display the form.
+
+            ...
+            {% extends 'learning_logs/new_topic.html' %}
+
+            {% block content %}
+              <p>Add a new topic:</p>
+
+              <form action="{% url 'learning_logs:new_topic' %}" method='post'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button name="submit">Add topic</button>
+              </form>
+
+            {% endblock content %}
+            ...
+
+            On the sixth row, we define an HTML form.
+            The first argument 'action', tells the browser where to send the information from the form.
+            We'll send it to the new_topic() view function.
+            The second argument 'method', tells the browser what request to submit.
+            We tell it to submit a POST-request.
+
+            On row 7, we write a template tag which prevents attackers from using the form
+            to gain unauthorized access to the server.
+            This kind of attack is called a cross-site request forgery (csrf).
+
+            On row 8, we display the form.
+            See how simple Django does a task like this.
+            The template variable {{ form.as_p }} tells Django to create the fields and display the form.
+            as_p is a modifier which tells Django to render all the form elements in
+            a paragraph format, as a simple way to display the form neatly.
+            
+            At row 9, we create a button because Django doesn't do it by default.
+            The name argument tells Django what kind of a button it is, 
+            and we tell Django it will submit the form.
+        
+        Linking to the new_topic Page:
+
+            Next step is to add a link to the new_topic page on the topics page.
+            We modify topics.html and add a link after the list of existing topics.
+
+            <a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
+
+    Adding New Entries:
+
+        ...

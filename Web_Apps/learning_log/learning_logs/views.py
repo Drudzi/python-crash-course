@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #render() function renders a response based on data provided by views.
+#The redirect() function is used to redirect a user back to a given page.
+# redirect() takes the name of a view-function and redirects to that view, displaying its template. 
 
 from .models import Topic
 #We import the models associated with the data we'll need in our views.
+
+from .forms import TopicForm
+#We also import the forms we need.
 
 def index(request):
     """The home page for Learning Log."""
@@ -49,3 +54,40 @@ def topic(request, topic_id):
     #We enter the attributes above to the context, which let's us reach them from the template-file.
 
     return render(request, 'learning_logs/topic.html', context)
+
+def new_topic(request):
+    """Add a new topic."""
+    if request.method != 'POST':
+        #Here we test whether it is a POST or GET request.
+        # No data submitted, create a blank form:
+        form = TopicForm() #Creating a form instance without arguments creates a blank form.
+    else:
+        #If a form of information has been submitted, it's a POST request.
+        # POST data submitted; process data:
+        form = TopicForm(data=request.POST)
+        #Data has been submitted and has been stored in request.POST.
+        # We create a form object using the data argument to which we assign the submitted form data.
+
+        if form.is_valid():
+            #Before we save the data to the database, we need to ensure it's valid.
+            # The is_valid() method checks that all required fields in our form...
+            #  have been filled in and that the data matches the field types that are expected.
+            #   For an example, it checks that the length of text is less than 200 characters,
+            #    which we specified inside Topic in models.py.
+            #     Also worth noting is that all fields in a form are required by default.
+            
+            form.save() #If the data is valid, we'll save it to the database using save() method.
+
+            return redirect('learning_logs:topics')
+            #When we've saved the data, we use redirect() and give it the topics page...
+            # to return them to the topics page where they hopefully will see their new topic.
+
+            #Note that a return statement ends a function call, so if it goes through the code below won't.
+        
+    #If either a new blank form has been created or if submitted data was invalid...
+    # it will run the code below and display a blank form.
+    #  If data was invalid, it will also display some default error messages.
+
+    # Display a blank or invalid form:
+    context = {'form': form} #We give the blank form to the context so we can work with it in the template.
+    return render(request, 'learning_logs/new_topic.html', context)
