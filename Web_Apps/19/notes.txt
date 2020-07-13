@@ -111,4 +111,21 @@ ALLOWING USERS TO ENTER DATA:
 
     Adding New Entries:
 
-        ...
+        Let's also allow users to create and edit entries.
+
+        The Entry ModelForm:
+
+            Like we did with topics, we'll also need to create a form associated with the Entry model.
+            We create EntryForm in forms.py.
+        
+        The new_entry URL:
+
+            We define its URL pattern in urls.py.
+
+            path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry')
+
+            We include the topic_id argument because this page needs to be associated with a specific topic.
+
+        The new_entry() View Function:
+
+            ...

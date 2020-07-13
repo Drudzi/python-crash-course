@@ -3,10 +3,10 @@ from django.shortcuts import render, redirect
 #The redirect() function is used to redirect a user back to a given page.
 # redirect() takes the name of a view-function and redirects to that view, displaying its template. 
 
-from .models import Topic
+from .models import Topic, Entry
 #We import the models associated with the data we'll need in our views.
 
-from .forms import TopicForm
+from .forms import TopicForm, EntryForm
 #We also import the forms we need.
 
 def index(request):
@@ -91,3 +91,6 @@ def new_topic(request):
     # Display a blank or invalid form:
     context = {'form': form} #We give the blank form to the context so we can work with it in the template.
     return render(request, 'learning_logs/new_topic.html', context)
+
+def new_entry(request, topic_id):
+    """Add a new entry for a particular topic."""
