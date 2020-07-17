@@ -130,5 +130,5 @@ def new_entry(request, topic_id):
     
     #The code below will be execute if form is blank or invalid.
     # Display a blank or invalid form:
-    context = {'form': form} #We assign the form to the context so we can display it in the template.
+    context = {'form': form, 'topic': topic} #We assign the form to the context so we can display it in the template.
     return render(request, 'learning_logs/new_entry.html', context)

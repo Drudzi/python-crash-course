@@ -175,3 +175,16 @@ ALLOWING USERS TO ENTER DATA:
 
             We add this anchor tag below 'Entries:' before the UL-tag.
             We link to the new_entry view function and give it the current topic id, which will return the URL.
+    
+    Editing Entries:
+
+        Now we'll make a page where users can edit their entries.
+
+        The edit_entry URL:
+
+            We add and prepare our path in the app's urls.py:
+                path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry')
+        
+        The edit_entry() View Function:
+
+            ...
