@@ -1,0 +1,76 @@
+0000000000000000000000000000000000000000 16cc083b4b606f6c5678e2840158bf2f20268f2b Drudzi <jonathan.r.axelsson@gmail.com> 1589654659 +0200	clone: from https://github.com/Drudzi/python-crash-course.git
+16cc083b4b606f6c5678e2840158bf2f20268f2b e52340bfea16ec962eb4af8150d27a7707caa378 Drudzi <jonathan.r.axelsson@gmail.com> 1589811184 +0200	pull --progress origin: Fast-forward
+e52340bfea16ec962eb4af8150d27a7707caa378 0f06873b290b5eedef8d3bb175aaae9aaf9ec0cf Drudzi <jonathan.r.axelsson@gmail.com> 1589812338 +0200	pull --progress origin: Fast-forward
+0f06873b290b5eedef8d3bb175aaae9aaf9ec0cf e67fc4d3b00378b87ee7783252bae35f08cfefc0 Drudzi <jonathan.r.axelsson@gmail.com> 1589812399 +0200	commit: Removing pycache from Alien Invasion folder
+e67fc4d3b00378b87ee7783252bae35f08cfefc0 fdcd791b80b5f4a9504b148fdd4af05d7922f084 Drudzi <jonathan.r.axelsson@gmail.com> 1589812498 +0200	commit: Test
+fdcd791b80b5f4a9504b148fdd4af05d7922f084 e18465b7b44a48f7b85b18e171addf42fbf65d03 Drudzi <jonathan.r.axelsson@gmail.com> 1589812591 +0200	commit: Deleted pycache from Sideways Shooter folder
+e18465b7b44a48f7b85b18e171addf42fbf65d03 a9db45cb6a909855b4940d0d2e4fc308367248c2 Drudzi <jonathan.r.axelsson@gmail.com> 1589835080 +0200	commit: Stargrid works in 13-1
+a9db45cb6a909855b4940d0d2e4fc308367248c2 5f8c46caffca8becf22760debe3edf777991a7f6 Drudzi <jonathan.r.axelsson@gmail.com> 1589835778 +0200	commit: 13-2. works
+5f8c46caffca8becf22760debe3edf777991a7f6 134202603311a49612b18d8f5b1bd86468656933 Drudzi <jonathan.r.axelsson@gmail.com> 1589956930 +0200	commit: Aliens move sideways and down
+134202603311a49612b18d8f5b1bd86468656933 76190d18d12e5a43b3b429f91ea8e8e43070bd4c Drudzi <jonathan.r.axelsson@gmail.com> 1589964423 +0200	commit: 13-3 is now completed.
+76190d18d12e5a43b3b429f91ea8e8e43070bd4c 5cfafb764293b698be20f4f57132775cf00c060a Drudzi <jonathan.r.axelsson@gmail.com> 1589977248 +0200	commit: 13-4 (grid) now runs smoothly.
+5cfafb764293b698be20f4f57132775cf00c060a 7dc282dc030a79fbe03d0f31462b234ea8f3d608 Drudzi <jonathan.r.axelsson@gmail.com> 1589979701 +0200	commit: Bullets now kill aliens in AI
+7dc282dc030a79fbe03d0f31462b234ea8f3d608 506b0d6d5977e6c7cd878c37dad864f463025074 Drudzi <jonathan.r.axelsson@gmail.com> 1589981119 +0200	pull --progress origin: Fast-forward
+506b0d6d5977e6c7cd878c37dad864f463025074 0c1179a54d39f1fa5236931098ccbfd118c2b35a Drudzi <jonathan.r.axelsson@gmail.com> 1589982823 +0200	commit: Enemy image to SS
+0c1179a54d39f1fa5236931098ccbfd118c2b35a 8010e46dd157c62c037fc086dd8a7abbaf5a7c5b Drudzi <jonathan.r.axelsson@gmail.com> 1589983824 +0200	commit: Enemy image updated in SS
+8010e46dd157c62c037fc086dd8a7abbaf5a7c5b 572c096132a995a8a7842fac1a64e9e726bd5041 Drudzi <jonathan.r.axelsson@gmail.com> 1589984005 +0200	commit: test
+572c096132a995a8a7842fac1a64e9e726bd5041 3aad09376704f36f1f026334b6d7b21e82418baf Drudzi <jonathan.r.axelsson@gmail.com> 1590389635 +0200	pull --progress origin: Fast-forward
+3aad09376704f36f1f026334b6d7b21e82418baf 5d2693baba4d306d6947b371564b3e018e8d1b0a Drudzi <jonathan.r.axelsson@gmail.com> 1590391035 +0200	commit: High score now works
+5d2693baba4d306d6947b371564b3e018e8d1b0a a7bcae40c99f7e4cbe0a0c51d9254a7ef66dd2bf Drudzi <jonathan.r.axelsson@gmail.com> 1590393228 +0200	commit: Levels are now displayed correctly
+a7bcae40c99f7e4cbe0a0c51d9254a7ef66dd2bf 78bc7ea12f356d5a3538dcfab2c20dc51a7c025f Drudzi <jonathan.r.axelsson@gmail.com> 1590393487 +0200	commit: Levels complete
+78bc7ea12f356d5a3538dcfab2c20dc51a7c025f 5278932317004ca099ad94d10232fa75fc0ef305 Drudzi <jonathan.r.axelsson@gmail.com> 1590407100 +0200	commit: High score is now stored in a file
+5278932317004ca099ad94d10232fa75fc0ef305 1a4f436d8130f177511981057d65a47467d21ba7 Drudzi <jonathan.r.axelsson@gmail.com> 1590952342 +0200	pull --progress origin: Fast-forward
+1a4f436d8130f177511981057d65a47467d21ba7 b861c6df4083166ecdf8926b2ec5e70a1656267e Drudzi <jonathan.r.axelsson@gmail.com> 1591095357 +0200	pull --progress origin: Fast-forward
+b861c6df4083166ecdf8926b2ec5e70a1656267e 57791267eeb9fa6d0a47f43c83f49d7043d24e3d Drudzi <jonathan.r.axelsson@gmail.com> 1591097061 +0200	commit: Bug fix and lives-ships size decrease
+57791267eeb9fa6d0a47f43c83f49d7043d24e3d 21341394deffa236045aa6801d36c8e644c805b2 Drudzi <jonathan.r.axelsson@gmail.com> 1591098587 +0200	commit: Enemy y spawn range increased
+21341394deffa236045aa6801d36c8e644c805b2 ea5d297aa2ea83f7597e1b7c7c78bbb755981429 Drudzi <jonathan.r.axelsson@gmail.com> 1591169769 +0200	commit: FPS set
+ea5d297aa2ea83f7597e1b7c7c78bbb755981429 bb3971913a918e7f8ea1400a8c699fcd8047013d Drudzi <jonathan.r.axelsson@gmail.com> 1591198194 +0200	commit: Cleared some irrelevant files
+bb3971913a918e7f8ea1400a8c699fcd8047013d b98f38c4819a6d9381c181edef61b6ae8897793e Drudzi <jonathan.r.axelsson@gmail.com> 1591200892 +0200	commit: Version 1.0
+b98f38c4819a6d9381c181edef61b6ae8897793e 9911e95a76ba6c3cd422b4fe51c6947c5673d802 Drudzi <jonathan.r.axelsson@gmail.com> 1591343696 +0200	commit: 1.0 version complete
+9911e95a76ba6c3cd422b4fe51c6947c5673d802 7c9e1dadb96468c3a34fd24b163b3f9206ead8f4 Drudzi <jonathan.r.axelsson@gmail.com> 1591640136 +0200	commit: Data viz begins
+7c9e1dadb96468c3a34fd24b163b3f9206ead8f4 65b9d4d57f3fefc763682a5f1a8d35448d0a01e6 Drudzi <jonathan.r.axelsson@gmail.com> 1591647583 +0200	commit: Data visualisations s. 315
+65b9d4d57f3fefc763682a5f1a8d35448d0a01e6 b82fc4c383148fc9eb9b79e8955c7893b193ebc2 Drudzi <jonathan.r.axelsson@gmail.com> 1591695006 +0200	commit: Random walk begun
+b82fc4c383148fc9eb9b79e8955c7893b193ebc2 a6ed073061f69aabef74bb5b347e7047d176fd0f Drudzi <jonathan.r.axelsson@gmail.com> 1591697491 +0200	commit: Random walk finished
+a6ed073061f69aabef74bb5b347e7047d176fd0f 2c80851828488820152288da8069dbf96ca9c912 Drudzi <jonathan.r.axelsson@gmail.com> 1591697989 +0200	commit: Create 15_3.py
+2c80851828488820152288da8069dbf96ca9c912 c27e5e59898bd4b559e700665908631249ac4c37 Drudzi <jonathan.r.axelsson@gmail.com> 1591702502 +0200	commit: Dice
+c27e5e59898bd4b559e700665908631249ac4c37 3648acca3b64ff01cc660c6fcb2097b96d76bdc0 Drudzi <jonathan.r.axelsson@gmail.com> 1591823710 +0200	commit: Rolling two dice
+3648acca3b64ff01cc660c6fcb2097b96d76bdc0 23d9ac5c4c738e6b767d2f313136bda1cb9e2f3a Drudzi <jonathan.r.axelsson@gmail.com> 1591867237 +0200	commit: 15_7 complete
+23d9ac5c4c738e6b767d2f313136bda1cb9e2f3a 231299d7629c2d1e7cef5d8cf251b32e1d8a4beb Drudzi <jonathan.r.axelsson@gmail.com> 1591870119 +0200	commit: 15_10_mpl ongoing
+231299d7629c2d1e7cef5d8cf251b32e1d8a4beb 01920e7e6708300ce55d48023e38be69d15911fa Drudzi <jonathan.r.axelsson@gmail.com> 1591971012 +0200	pull --progress origin: Fast-forward
+01920e7e6708300ce55d48023e38be69d15911fa f7a11712f4976f668853859f9cd9e0c01cc6525e Drudzi <jonathan.r.axelsson@gmail.com> 1591972885 +0200	commit: Update 15_10_mpl.py
+f7a11712f4976f668853859f9cd9e0c01cc6525e deb6b803a4a51291263ae1671f68240fe2d7ce0a Drudzi <jonathan.r.axelsson@gmail.com> 1592122864 +0200	commit: 15_10_plotly
+deb6b803a4a51291263ae1671f68240fe2d7ce0a 9b9ae0d6b710caee25a52e47ef8108042b6049bf Drudzi <jonathan.r.axelsson@gmail.com> 1592125692 +0200	commit: 15_10_plotly finished
+9b9ae0d6b710caee25a52e47ef8108042b6049bf f605df4376ba651051a1fb38152a9d93307399b1 Drudzi <jonathan.r.axelsson@gmail.com> 1592125883 +0200	commit: Create 1_sitka_highs.py
+f605df4376ba651051a1fb38152a9d93307399b1 afa1b708b377ffd0f8dcc40996880423e24cc77f Drudzi <jonathan.r.axelsson@gmail.com> 1592167950 +0200	commit: Max temps collected
+afa1b708b377ffd0f8dcc40996880423e24cc77f 5cb5dac2385675509daf8f459d89eec68e5d4710 Drudzi <jonathan.r.axelsson@gmail.com> 1592222193 +0200	commit: Next error checking
+5cb5dac2385675509daf8f459d89eec68e5d4710 bc60614045475d81985c770f08c4938b98ebd687 Drudzi <jonathan.r.axelsson@gmail.com> 1592340016 +0200	commit: Är på 16-5.
+bc60614045475d81985c770f08c4938b98ebd687 13fcfdb00a5d9d4d7382f75627c7b37ed6465956 Drudzi <jonathan.r.axelsson@gmail.com> 1592341611 +0200	commit: 16-4 färdig
+13fcfdb00a5d9d4d7382f75627c7b37ed6465956 99de555b3cb704a2a880529955b2c7d52c62e321 Drudzi <jonathan.r.axelsson@gmail.com> 1592428015 +0200	commit: Hover texts next
+99de555b3cb704a2a880529955b2c7d52c62e321 308f60fb4d4ad4fa3bb764af6ceda2cb7d382c12 Drudzi <jonathan.r.axelsson@gmail.com> 1592464888 +0200	commit: 16-9 pågår
+308f60fb4d4ad4fa3bb764af6ceda2cb7d382c12 faba3c14e720f1461ccdbc7843cd872bf489d1f2 Drudzi <jonathan.r.axelsson@gmail.com> 1592480883 +0200	commit: 16-9 complete
+faba3c14e720f1461ccdbc7843cd872bf489d1f2 fcd39702c63fe0b84c12b7beeabd4acca46b4fa7 Drudzi <jonathan.r.axelsson@gmail.com> 1592493969 +0200	commit: 16-9. finished
+fcd39702c63fe0b84c12b7beeabd4acca46b4fa7 b39a322baeb922263d0ad1f07e07e4e50b20b81b Drudzi <jonathan.r.axelsson@gmail.com> 1592516370 +0200	commit: Next: Add hover text
+b39a322baeb922263d0ad1f07e07e4e50b20b81b 8b25f65b92d24309c30c31ef87f9d2d89d06d4bf Drudzi <jonathan.r.axelsson@gmail.com> 1592557466 +0200	commit: Next is clickable links
+8b25f65b92d24309c30c31ef87f9d2d89d06d4bf ee43effc3f88d12e6e4d952cef72c4f4869af12e Drudzi <jonathan.r.axelsson@gmail.com> 1592776379 +0200	commit: Nästa Hacker API
+ee43effc3f88d12e6e4d952cef72c4f4869af12e 02340c3d14d260556728f7df1a6a9043204b25d7 Drudzi <jonathan.r.axelsson@gmail.com> 1592863640 +0200	commit: Beskriv hn_submissions.py
+02340c3d14d260556728f7df1a6a9043204b25d7 e344fa4215b6d9e478fadbe2c460045747d242df Drudzi <jonathan.r.axelsson@gmail.com> 1592913436 +0200	commit: Nästa 17-3
+e344fa4215b6d9e478fadbe2c460045747d242df 94d90bb40c0c1cae451a1043997a010ca6ba96c0 Drudzi <jonathan.r.axelsson@gmail.com> 1593036565 +0200	commit: Nästa Django
+94d90bb40c0c1cae451a1043997a010ca6ba96c0 f23a74c95f8195b020325b5ecba40a318b48a52b Drudzi <jonathan.r.axelsson@gmail.com> 1593104850 +0200	pull --progress origin: Fast-forward
+f23a74c95f8195b020325b5ecba40a318b48a52b 143cd2f6a51281c9de28b81f49dea450fb299f6e Drudzi <jonathan.r.axelsson@gmail.com> 1593120620 +0200	commit: Django Project started
+143cd2f6a51281c9de28b81f49dea450fb299f6e 26fde2feab82712cfc77f376532f7fa85461e72b Drudzi <jonathan.r.axelsson@gmail.com> 1593191020 +0200	pull --progress origin: Fast-forward
+26fde2feab82712cfc77f376532f7fa85461e72b 1b92739ed2f5c17fec7a4201b84d563298f0eaec Drudzi <jonathan.r.axelsson@gmail.com> 1593193055 +0200	commit: Nästa The Django Admin Site
+1b92739ed2f5c17fec7a4201b84d563298f0eaec e00beeeb02fe982814545b573284d94740d3d781 Drudzi <jonathan.r.axelsson@gmail.com> 1593379985 +0200	commit: Next Django Shell
+e00beeeb02fe982814545b573284d94740d3d781 dd2476107b6d8040fc3042a27b898e319e764c7f Drudzi <jonathan.r.axelsson@gmail.com> 1593549598 +0200	commit: Fortsätt 18-4
+dd2476107b6d8040fc3042a27b898e319e764c7f 8dfdfb41562e978c921366aab826377755883706 Drudzi <jonathan.r.axelsson@gmail.com> 1593640056 +0200	commit: Pizzeria 18-4 complete
+8dfdfb41562e978c921366aab826377755883706 80e25cc924888766b885968b27239968117dc5c5 Drudzi <jonathan.r.axelsson@gmail.com> 1593694963 +0200	commit: Nästa Building Additional Pages
+80e25cc924888766b885968b27239968117dc5c5 4c82576ebe10c33dadc7ccd2f1195df2b65d2cf0 Drudzi <jonathan.r.axelsson@gmail.com> 1593863110 +0200	commit: ...
+4c82576ebe10c33dadc7ccd2f1195df2b65d2cf0 1d467bd9a5578bb67a1f50d7bfc81186592b2411 Drudzi <jonathan.r.axelsson@gmail.com> 1593876529 +0200	commit: base.html
+1d467bd9a5578bb67a1f50d7bfc81186592b2411 ead91e7d4ca53a88c413f4e49d6f18557df82781 Drudzi <jonathan.r.axelsson@gmail.com> 1594071121 +0200	commit: Nästa Topics page
+ead91e7d4ca53a88c413f4e49d6f18557df82781 791d9a506f77e2e171406a2bae608646cb168b06 Drudzi <jonathan.r.axelsson@gmail.com> 1594157136 +0200	commit: Topics template
+791d9a506f77e2e171406a2bae608646cb168b06 1826b410961e8bc20184156cc3e192def1dd5596 Drudzi <jonathan.r.axelsson@gmail.com> 1594334363 +0200	commit: Next is ind. topic pages
+1826b410961e8bc20184156cc3e192def1dd5596 0458c0957e8714e3d8f12118f33188e584c26b44 Drudzi <jonathan.r.axelsson@gmail.com> 1594371524 +0200	commit: Update urls.py
+0458c0957e8714e3d8f12118f33188e584c26b44 fc4cdb5db872834a671f794e03f468a317dea950 Drudzi <jonathan.r.axelsson@gmail.com> 1594415917 +0200	commit: Nästa Topic Template
+fc4cdb5db872834a671f794e03f468a317dea950 e0553fdb0f36d78dbd6e7b1155035af601f00174 Drudzi <jonathan.r.axelsson@gmail.com> 1594557064 +0200	commit: 18-8 finished
+e0553fdb0f36d78dbd6e7b1155035af601f00174 540df7f160d72ab1faf1520d3cfb94437e015eea Drudzi <jonathan.r.axelsson@gmail.com> 1594585882 +0200	commit: Nästa New Entries
+540df7f160d72ab1faf1520d3cfb94437e015eea 70ca41b1a0f702dcc290ca318d518c11cd9fc549 Drudzi <jonathan.r.axelsson@gmail.com> 1594624890 +0200	commit: Fortsätt vid new_entry() views.py
+70ca41b1a0f702dcc290ca318d518c11cd9fc549 26ee1f9fc34147ff3370ab56b04e7eefc3f8ee73 Drudzi <jonathan.r.axelsson@gmail.com> 1594670775 +0200	commit: ReverseMatch Error

@@ -128,4 +128,50 @@ ALLOWING USERS TO ENTER DATA:
 
         The new_entry() View Function:
 
+            We create the new_entry view function in views.py.
+            This function will look much like the new_topic() function.
+            See views.py.
+
+        The new_entry Template
+
+            Similar to new_topic.html, we define new_entry.html.
+
             ...
+            {% extends 'learning_logs/base.html' %}
+
+            {% block content %}
+
+              <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
+
+              <p>Add a new entry:</p>
+              <form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button name='submit'>Add entry</button>
+              </form>
+
+            {% endblock content %}
+            ...
+
+            We extend the base.html template on the first row.
+            Then we display the current topic the user is writing an entry for,
+            we also link it to the corresponding topic page using an anchor tag and a URL-tag.
+
+            When we define the HTML form, we include the topic.id in the URL-tag.
+            This sends the entered form data to the new_entry() view function with the appropriate topic object.
+
+            Other than that, this template is pretty much identical to the new_topic template.
+
+        Linking to the new_entry Page:
+
+            Next step is to include a link to the new_entry page from every individual topic page.
+            We modify the topic.html template.
+
+            ...
+            <p>
+              <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entryr</a>
+            </p>
+            ...
+
+            We add this anchor tag below 'Entries:' before the UL-tag.
+            We link to the new_entry view function and give it the current topic id, which will return the URL.

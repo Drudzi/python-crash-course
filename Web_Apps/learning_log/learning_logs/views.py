@@ -59,6 +59,7 @@ def new_topic(request):
     """Add a new topic."""
     if request.method != 'POST':
         #Here we test whether it is a POST or GET request.
+        #request.method gets what kind of request it is, a string in capital letters.
         # No data submitted, create a blank form:
         form = TopicForm() #Creating a form instance without arguments creates a blank form.
     else:
@@ -94,3 +95,40 @@ def new_topic(request):
 
 def new_entry(request, topic_id):
     """Add a new entry for a particular topic."""
+    topic = Topic.objects.get(id=topic_id)
+    #We get the topic object we are currently working with using the topic_id from the URL.
+
+    if request.method != 'POST':
+        #If it's a GET request, we create a new empty form.
+        # No data submitted, create a blank form:
+        form = EntryForm()
+    
+    else:
+        #A user has entered information and submitted it.
+        # POST data submitted; process data:
+        form = EntryForm(data=request.POST)
+        #The first thing we do is to create a new instance of the EntryForm containing the data from the user.
+        if form.is_valid():
+            #If the form with the data from the user is valid...
+
+            new_entry = form.save(commit=False)
+            #We assign and save the form to new_entry while including the commit argument.
+            # commit=False tells Django not to save it to the database, just assign it to the variable.
+            #  We do this because we first want to assign the entry to the topic.
+
+            new_entry.topic = topic
+            #Here we assign the current topic object to the entry's topic attribute, so they connect.
+
+            new_entry.save() 
+            #Now, we are ready to save the entry object to the database with the associated topic.
+
+            return redirect('learning_logs:topic', topic_id=topic_id)
+            #This redirect call will need two arguments.
+            # The first one should as always be the view-function we want to redirect to.
+            #  And in this case, the topic() view function also needs a topic_id.
+            #   We assign the current topic_id to the topic() view function as a keyword argument.
+    
+    #The code below will be execute if form is blank or invalid.
+    # Display a blank or invalid form:
+    context = {'form': form} #We assign the form to the context so we can display it in the template.
+    return render(request, 'learning_logs/new_entry.html', context)
