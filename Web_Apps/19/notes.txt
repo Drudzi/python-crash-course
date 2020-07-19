@@ -187,4 +187,48 @@ ALLOWING USERS TO ENTER DATA:
         
         The edit_entry() View Function:
 
+            When the edit_entry() view function recieves a GET request, it should return
+            a form which allows the user to edit the entry.
+            When it's a POST request, with an edited entry, we'll save it to the database.
+            See views.py
+        
+        The edit_entry Template:
+
             ...
+            {% extends "learning_logs/base.html" %}
+
+            {% block content %}
+
+              <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
+
+              <p>Edit entry:</p>
+
+              <form action="{% url 'learning_logs:edit_entry' entry.id %}" method='post'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button name="submit">Save changes</button>
+              </form>
+
+            {% endblock content %}
+            ...
+
+            At the action argument, we enter edit_entry with the entry id which...
+            sends the form back to the edit_entry() function for processing.
+        
+        Linking to the edit_entry Page:
+
+            ...
+            <a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>
+            ...
+
+            We include the anchor tag above to link to the edit_entry page from every topic page.
+            It links to the edit_entry page for the current entry.
+
+            Now Learning Log has most of the functionality it needs.
+            Users can add topics, add entries and change entries.
+            Now we'll implement a registration system so anyone can create an account
+            and manage their own topics and entries.
+
+SETTING UP USER ACCOUNTS:
+
+    ...

@@ -132,3 +132,29 @@ def new_entry(request, topic_id):
     # Display a blank or invalid form:
     context = {'form': form, 'topic': topic} #We assign the form to the context so we can display it in the template.
     return render(request, 'learning_logs/new_entry.html', context)
+
+def edit_entry(request, entry_id):
+    """Edit an existing entry."""
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST':
+        #If there is a GET request, we create a new form including the current Entry object.
+        # The instance argument takes an instance/object and tells Django to create
+        #  a new form prefilled with the data from that object.
+        
+        # Initial request; pre-fill form with the current entry.
+        form = EntryForm(instance=entry)
+    else:
+        # POST data submitted; process data.
+        form = EntryForm(instance=entry, data=request.POST)
+        #When it's a post request and the user has submitted data...
+        # We create a form and give it the data from the POST-request as usual.
+        #  We also assign the text-data to the current entry instance using the instance arg.
+        #   This assigns the data to the right Entry-object.
+        if form.is_valid():
+            form.save()
+            return redirect('learning_logs:topic', topic_id=topic_id)
+    
+    context = {'form': form, 'topic': topic, 'entry': entry}
+    return render(request, 'learning_logs/edit_entry.html', context)
