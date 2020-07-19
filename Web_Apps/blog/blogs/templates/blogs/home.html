@@ -1,0 +1,19 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+
+  <p>Welcome to my Sports Blog. Enjoy!</p>
+
+  <ul>
+  {% for post in posts %}  
+    <li>
+      <b>{{ post }}</b>
+      <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
+      <p>{{ post.text|linebreaks }}</p>
+    </li>
+  {% empty %}
+   <li>There are no published posts yet.</li>
+  {% endfor %} 
+  </ul>
+
+{% endblock content %}
