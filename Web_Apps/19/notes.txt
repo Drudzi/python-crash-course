@@ -231,4 +231,110 @@ ALLOWING USERS TO ENTER DATA:
 
 SETTING UP USER ACCOUNTS:
 
-    ...
+    Let's begin setting up the user registration and authorization system.
+
+    The users App:
+
+        We'll create an app called users to contain all the functionality we need
+        for the users system in the terminal using:
+            python manage.py startapp users
+
+        Adding users to settings.py:
+
+            We add 'users' to settings.py in the INSTALLED_APPS list under # My apps.
+            This will make Django include the app in the project.
+        
+        Including the URLs from users:
+
+            We add the users URLs to the urlpatterns list in the project's urls.py.
+
+    The Login Page:
+
+        The first thing we'll do is to implement a login page.
+        Django actually provides a default login view, which makes our life a bit easier.
+        Because it's a Django default, the URL pattern will look a little different.
+
+        To begin with, we create the urls.py file for the users app in its directory.
+        We import the things we need, set the app_name attribute and create the urlpatterns list.
+
+        Inside the urlpatterns list, we include the default authentication urls...'
+        which includes named URL patterns like 'login' and 'logout'.
+        By default, when Django sees the login URL, it sends the request to the default login view.
+    
+        The login Template:
+
+            When someone requests the login page, Django uses the default login view but
+            it doesn't use a default template for it. We need to make that ourselves.
+
+            The default authentication views from Django look for templates inside a special folder
+            called registration, which we need to create since it's not initially made by Django.
+            This registration folder should be inside the templates folder, which we also need to make.
+
+            We create login.html in 'templates/registration':
+
+                ...
+                {% extends "learning_logs/base.html" %}
+
+                {% block content %}
+
+                 {% if form.errors %}
+                   <p>Your username and password didn't match. Please try again.</p>
+                  {% endif %}
+  
+                  <form method="post" action="{% url 'users:login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button name="submit">Log in</button>
+                    <input type="hidden" name="next"
+                      value="{% url 'learning_logs:index' %}" />
+                  </form>
+
+                {% block content %}
+                ...
+            
+            We extend this page from the base-template. 
+            Note that a template can inherit from another template in another app.
+
+            In the if-block, we check if the default login-form's error attribute is set.
+            If it is (if login credentials were incorrect) we display an error message.
+
+            We get the login form from the login view function.
+            We also add the submit button.
+
+            At <input... we add a hidden form element.
+            When we give "next" to the name argument, we tell Django where we want to send
+            the user if the login was successful. The value argument after name argument 
+            needs a URL where it will send the user. 
+            We send the user back to the home page.
+        
+        Linking to the Login Page:
+
+            Let's add a link to the Log In page in the base template.
+            We only want this link to show if a user isn't logged in,
+            so we nest this link inside an if-statement.
+            If a user is logged in, we display a greetings message to the user.
+
+            ...
+            {% if user.is_authenticated %}
+              Hello, {{ user.username }}.
+            % else %}
+              <a href="{% url 'users:login' %}">Log in</a>
+            {% endif %}
+            ...
+
+            If the users is_authenticated attribute is set to True, which it is when a user is logged in,
+            we display a message saying hello.
+            We access their usernames using the users username attribute which is set
+            if a user has been authenticated.
+        
+        Using the Login Page:
+
+            We have already set up a user account (superuser).
+            We try the login page to see if it works as it should.
+
+            It works, it displays the correct greeting.
+
+    Logging out:
+
+        ...
