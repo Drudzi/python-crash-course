@@ -7,5 +7,7 @@ from . import views
 app_name = 'blogs'
 
 urlpatterns = [
-    path('home', views.home, name='home')
+    path('home', views.home, name='home'),
+    path('new', views.new_post, name='new_post'),
+    path('edit/<int:post_id>', views.edit_post, name='edit_post'),
 ]

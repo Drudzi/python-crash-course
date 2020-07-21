@@ -2,7 +2,9 @@
 
 {% block content %}
 
-  <p>Welcome to my Sports Blog. Enjoy!</p>
+  <p>Welcome to my blog!</p>
+
+  <p><a href="{% url 'blogs:new_post' %}">Create new post</a></p>
 
   <ul>
   {% for post in posts %}  
@@ -10,6 +12,10 @@
       <b>{{ post }}</b>
       <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
       <p>{{ post.text|linebreaks }}</p>
+
+      <p>Author: {{ post.author }}</p>
+
+      <p><a href="{% url 'blogs:edit_post' post.id %}">Edit post</a></p>
     </li>
   {% empty %}
    <li>There are no published posts yet.</li>
