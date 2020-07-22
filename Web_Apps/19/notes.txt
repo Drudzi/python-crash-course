@@ -337,4 +337,37 @@ SETTING UP USER ACCOUNTS:
 
     Logging out:
 
-        ...
+        We need to provide a way for users to logout.
+        We'll add a link to base.html which logs users out and sends them to a page confirming that.
+
+        Adding a Logout Link to base.html:
+
+            <a href="{% url 'users:logout' %}">Log out</a>
+
+            We add the anchor tag above to base.html under the if-block.
+            We only want to show it when a user is logged in.
+            We use the default named URL pattern to logout which is simply 'logout'.
+        
+        The Logout Confirmation Page:
+
+            Users will want to know if their logout was successful. 
+            If so, we create a page called logged_out.html which will tell them that.
+            Why logged_out.html?
+                Because the default logout view function searches for a template called
+                logged_out.html in its render function.
+                We need to create that ourselves, and Django will automatically render it
+                when a user log's out.
+            
+            We store this page in the registration folder inside templates.
+
+            ...
+            {% extends "learning_logs/base.html" %}
+
+            {% block content %}
+              <p>You have been logged out. Thank you for visiting!</p>
+            {% endblock content %}
+            ...
+
+        The Registration Page:
+
+            ...
