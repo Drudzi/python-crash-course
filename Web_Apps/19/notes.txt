@@ -370,4 +370,32 @@ SETTING UP USER ACCOUNTS:
 
         The Registration Page:
 
-            ...
+            Next, we want to build a page so new users can actually register. We'll use
+            Django's default UserCreationForm but write our own view function and template.
+
+            The register URL:
+
+                We add the URL pattern to the register page in urls.py in the users app.
+                Don't forget to import the views module from the users directory to the urls.py.
+
+            The register() View Function:
+
+                Check views.py in users app.
+            
+            The register template:
+
+                ...
+                {% extends "learning_logs/base.html" %}
+
+                {% block content %}
+
+                  <form method="post" action="{% url 'users:register' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button name="submit">Register</button>
+                    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+                  </form>
+
+                {% endblock content %}
+                ...
