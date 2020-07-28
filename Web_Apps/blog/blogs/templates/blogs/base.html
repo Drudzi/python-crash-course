@@ -1,1 +1,12 @@
+<p>
+  <a href="{% url 'blogs:home' %}">Home</a> -
+  {% if user.is_authenticated %}  
+    Hello, {{ user.username }}
+    Logout
+  {% else %}
+    <a href="{% url 'users:register' %}">Register</a> -
+    Login
+  {% endif %}
+</p>
+
 {% block content %}{% endblock content %}
