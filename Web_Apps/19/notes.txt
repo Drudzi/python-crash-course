@@ -337,91 +337,105 @@ SETTING UP USER ACCOUNTS:
 
     Logging out:
 
-        We need to provide a way for users to logout.
-        We'll add a link to base.html which logs users out and sends them to a page confirming that.
+      We need to provide a way for users to logout.
+      We'll add a link to base.html which logs users out and sends them to a page confirming that.
 
-        Adding a Logout Link to base.html:
+      Adding a Logout Link to base.html:
 
-            <a href="{% url 'users:logout' %}">Log out</a>
+        <a href="{% url 'users:logout' %}">Log out</a>
 
-            We add the anchor tag above to base.html under the if-block.
-            We only want to show it when a user is logged in.
-            We use the default named URL pattern to logout which is simply 'logout'.
+        We add the anchor tag above to base.html under the if-block.
+        We only want to show it when a user is logged in.
+        We use the default named URL pattern to logout which is simply 'logout'.
         
-        The Logout Confirmation Page:
+      The Logout Confirmation Page:
 
-            Users will want to know if their logout was successful. 
-            If so, we create a page called logged_out.html which will tell them that.
-            Why logged_out.html?
-                Because the default logout view function searches for a template called
-                logged_out.html in its render function.
-                We need to create that ourselves, and Django will automatically render it
-                when a user log's out.
-            
-            We store this page in the registration folder inside templates.
+        Users will want to know if their logout was successful. 
+        If so, we create a page called logged_out.html which will tell them that.
+        Why logged_out.html?
+            Because the default logout view function searches for a template called
+            logged_out.html in its render function.
+            We need to create that ourselves, and Django will automatically render it
+            when a user log's out.
+        
+        We store this page in the registration folder inside templates.
 
-            ...
-            {% extends "learning_logs/base.html" %}
+        ...
+        {% extends "learning_logs/base.html" %}
 
-            {% block content %}
-              <p>You have been logged out. Thank you for visiting!</p>
-            {% endblock content %}
-            ...
+        {% block content %}
+          <p>You have been logged out. Thank you for visiting!</p>
+        {% endblock content %}
+        ...
 
-      The Registration Page:
+    The Registration Page:
 
-          Next, we want to build a page so new users can actually register. We'll use
-          Django's default UserCreationForm but write our own view function and template.
+      Next, we want to build a page so new users can actually register. We'll use
+      Django's default UserCreationForm but write our own view function and template.
 
-          The register URL:
+      The register URL:
 
-              We add the URL pattern to the register page in urls.py in the users app.
-              Don't forget to import the views module from the users directory to the urls.py.
+        We add the URL pattern to the register page in urls.py in the users app.
+        Don't forget to import the views module from the users directory to the urls.py.
 
-          The register() View Function:
+      The register() View Function:
 
-              Check views.py in users app.
-          
-          The register template:
+        Check views.py in users app.
+      
+      The register template:
 
-              ...
-              {% extends "learning_logs/base.html" %}
+        ...
+        {% extends "learning_logs/base.html" %}
 
-              {% block content %}
+        {% block content %}
 
-                <form method="post" action="{% url 'users:register' %}">
-                  {% csrf_token %}
-                  {{ form.as_p }}
+          <form method="post" action="{% url 'users:register' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-                  <button name="submit">Register</button>
-                  <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
-                </form>
+            <button name="submit">Register</button>
+            <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+          </form>
 
-              {% endblock content %}
-              ...
+        {% endblock content %}
+        ...
 
-              This template looks similar to most other templates we've built.
-              We display the form from the users:register view function.
-              
-              At <input... we give Django a URL where to redirect a user if the
-              form submission and register was successful.
-          
-          Linking to the Registration Page:
+        This template looks similar to most other templates we've built.
+        We display the form from the users:register view function.
+        
+        At <input... we give Django a URL where to redirect a user if the
+        form submission and register was successful.
+      
+      Linking to the Registration Page:
 
-              Next up, we'll add a link to the registration template into the base template...
-              if a user isn't currently logged in.
-              We'll add this anchor tag under the if-block.
+        Next up, we'll add a link to the registration template into the base template...
+        if a user isn't currently logged in.
+        We'll add this anchor tag under the if-block.
 
-              ...
-              <p>
-              --snip--
-                {% if user.is_authenticated %}
-                  Hello, {{ user.username }}.
-                  <a href="{% url 'users:logout' %}">Log out</a>
-                {% else %}
-                  <a href="{% url 'users:register' %}">Register</a> -
-                  <a href="{% url 'users:login' %}">Log in</a>
-                {% endif %}
-              </p>
-              ...
-            
+        ...
+        <p>
+        --snip--
+          {% if user.is_authenticated %}
+            Hello, {{ user.username }}.
+            <a href="{% url 'users:logout' %}">Log out</a>
+          {% else %}
+            <a href="{% url 'users:register' %}">Register</a> -
+            <a href="{% url 'users:login' %}">Log in</a>
+          {% endif %}
+        </p>
+        ...
+      
+ALLOWING USERS TO OWN THEIR DATA:
+
+    Users should be able to enter data that only belongs to them exclusively.
+    Next, we'll create a system to figure out which data belongs to which user.
+    We'll also restrict certain pages for users so they only can work with their own data.
+    We'll also modify the Topic model, so every Topic object belongs to a specific user.
+
+    Let's begin with restricting users access to certain pages.
+
+    Restricting Access with @login_required:
+
+        Django makes this easy for us using the @login_required director,
+        which can restrict access to certain pages for logged in users.
+        
