@@ -438,4 +438,30 @@ ALLOWING USERS TO OWN THEIR DATA:
 
         Django makes this easy for us using the @login_required director,
         which can restrict access to certain pages for logged in users.
+
+        A director is a directive written before the definition of a function,
+        which tells the function how to behave.
+
+        Restricting Access to the Topics Page:
+
+            In the finished project each topic will be owned by a user,
+            so we only want registered and logged in users to be able to access the topics page.
+
+            We import the login_required to views.py (in learning_logs) and assign it to the topics function.
+            Check views.py.
+
+            As a result, it only let's logged in users request the topics page.
+            If the user isn't logged in, it redirects the user to the login page.
+            This redirection doesn't work by default, we need to tell Django where to find the login page.
+
+            We tell Django by adding the following to the bottom of settings.py:
+
+                # My settings
+                LOGIN_URL = 'users:login'
+            
+            The LOGIN_URL variable tells Django which URL the login page has.
+        
+        Restricting Access Throughout Learning Log:
+
+            ...
         

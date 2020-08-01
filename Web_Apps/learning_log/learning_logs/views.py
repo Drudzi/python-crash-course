@@ -3,6 +3,10 @@ from django.shortcuts import render, redirect
 #The redirect() function is used to redirect a user back to a given page.
 # redirect() takes the name of a view-function and redirects to that view, displaying its template. 
 
+from django.contrib.auth.decorators import login_required
+#This decorator checks if a user is logged in, and only runs the function below if so.
+# If the user isn't logged in they'll be directed to the login page.
+
 from .models import Topic, Entry
 #We import the models associated with the data we'll need in our views.
 
@@ -18,6 +22,7 @@ def index(request):
     #   The render() function takes two arguments, the current request object and a template.
     #    The template defines what the page should look like, we define index.html inside learning_logs.
 
+@login_required #We apply this decorator to the topics function. Directors need @ in front.
 def topics(request):
     """Show all topics."""
     topics = Topic.objects.order_by('date_added')
