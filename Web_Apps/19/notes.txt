@@ -463,5 +463,37 @@ ALLOWING USERS TO OWN THEIR DATA:
         
         Restricting Access Throughout Learning Log:
 
-            ...
-        
+            As you can see, Django makes it easy to restrict access to pages.
+            But we need to decide ourselves, which pages to restrict.
+
+            The best way of doing this is to first think about the pages which don't
+            need restriction, and restrict all the others.
+
+            This method does most likely not leave out any pages that need restriction unrestricted.
+
+            In our Learning Log project, we'll only leave the home page and the registration page
+            unrestricted.
+            We add the login_required decorator before the view functions we want to restrict.
+
+        Connecting Data to Certain Users:
+
+            The next thing we need to do is to connect the data to the user who submitted it.
+
+            In Learning Log, each entry is connected to a specific topic,
+            which makes topics the higher level data. The lower level entries will follow the topics.
+
+            Due to that, we only need to assign each topic to a certain user.
+
+            We'll modify the Topic model to make each topic belong to a user,
+            using a ForeignKey. Don't forget to migrate the database after modifying a model.
+
+            The next step will be to change some view functions to only show data
+            owned by the current logged in user.
+
+                Modifying the Topic Model:
+
+                    ...
+
+                Identifying Existing Users:
+
+                    ...

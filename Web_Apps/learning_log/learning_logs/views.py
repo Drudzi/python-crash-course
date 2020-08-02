@@ -38,6 +38,7 @@ def topics(request):
     #When we're building a page that requires data, we also pass our context attribute
     # to the render function as our third argument.
 
+@login_required
 def topic(request, topic_id):
     """Show a single topic and all its entries."""
     #Our first view with a parameter other than request.
@@ -60,6 +61,7 @@ def topic(request, topic_id):
 
     return render(request, 'learning_logs/topic.html', context)
 
+@login_required
 def new_topic(request):
     """Add a new topic."""
     if request.method != 'POST':
@@ -98,6 +100,7 @@ def new_topic(request):
     context = {'form': form} #We give the blank form to the context so we can work with it in the template.
     return render(request, 'learning_logs/new_topic.html', context)
 
+@login_required
 def new_entry(request, topic_id):
     """Add a new entry for a particular topic."""
     topic = Topic.objects.get(id=topic_id)
@@ -138,6 +141,7 @@ def new_entry(request, topic_id):
     context = {'form': form, 'topic': topic} #We assign the form to the context so we can display it in the template.
     return render(request, 'learning_logs/new_entry.html', context)
 
+@login_required
 def edit_entry(request, entry_id):
     """Edit an existing entry."""
     entry = Entry.objects.get(id=entry_id)
