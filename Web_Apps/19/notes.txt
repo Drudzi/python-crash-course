@@ -492,8 +492,29 @@ ALLOWING USERS TO OWN THEIR DATA:
 
                 Modifying the Topic Model:
 
-                    ...
+                    We add a new attribute to the topic model called owner.
+                    This attribute contains a ForeignKey-relationship binding the topic to a user.
+                    Check models.py.
 
                 Identifying Existing Users:
+
+                    Our already existing topics don't have a user assigned to them,
+                    so we'll start by giving them all to the superuser.
+
+                    If there are more users registered, which is more realistic...
+                    you can identify them using the django shell.
+
+                    Like we did in models.py, we can import the User model and check existing
+                    users using a for loop looping through User.objects.all().
+                
+                Migrating the Database:
+
+                    Now we want to migrate our model changes to the database.
+                    We enter makemigrations into the cmd prompt, which will let us either set
+                    a default value in the prompt or a default value in models.py.
+
+                    This value should be the ID of the user, which you can access in the shell using user.id.
+                
+                Restricting Topics Access to Appropriate Users:
 
                     ...

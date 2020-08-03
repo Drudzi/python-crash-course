@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User #We import the User model so we can bind a topic to a user.
 
 # Create your models here.
 
@@ -17,6 +18,11 @@ class Topic(models.Model):
     #DateTimeField is a piece of data that will record a date and time for us.
     # The auto_now_add tells Django to...
     #  auto-set this attribute to the current date and time whenever the user creates a new topic, if True.
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    #We add this owner attribute containing a foreign key relationship between the topic and a user.
+    # We also include the on_delete argument with CASCADE so all topics bound to a user gets
+    #  deleted if the owning user gets deleted.
 
     def __str__(self):
         #We tell Django which attribute to use by default when it displays info about a topic using __str__ method.
