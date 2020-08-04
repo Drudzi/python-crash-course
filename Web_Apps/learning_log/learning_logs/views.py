@@ -25,7 +25,7 @@ def index(request):
 @login_required #We apply this decorator to the topics function. Directors need @ in front.
 def topics(request):
     """Show all topics."""
-    topics = Topic.objects.order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     #We assign the topics attribute a queryset from the database of the topics.
     # Using function order_by(), we order by the date_added attribute in the Topic class/model.
 

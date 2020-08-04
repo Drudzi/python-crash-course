@@ -517,4 +517,22 @@ ALLOWING USERS TO OWN THEIR DATA:
                 
                 Restricting Topics Access to Appropriate Users:
 
+                    Currently, when you're logged in and visit the topics page,
+                    you can see all topics no matter the owner.
+                    Now we'll modify the topics page so the user only can see their own topics.
+
+                    We change the following at the topics attribute:
+
+                        topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+
+                    ...
+                    Notice the request.user attribute.
+                    If a user is logged in, the request will always contain an attribute called user.
+                    The user attribute contains the logged in user object with its information.
+                    Topic.objects.filter(owner=request.user) is a query featuring a filter,
+                    and we filter the topics off of the owner attribute, which is a user-object.
+                    This query will contain all the topics owned by the current logged in user.
+                
+                Protecting a User's Topics:
+
                     ...
