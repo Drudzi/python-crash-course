@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 #This decorator checks if a user is logged in, and only runs the function below if so.
 # If the user isn't logged in they'll be directed to the login page.
 
+from django.http import Http404
+
 from .models import Topic, Entry
 #We import the models associated with the data we'll need in our views.
 
@@ -49,6 +51,10 @@ def topic(request, topic_id):
     # using the same method we used in the Django shell.
     #  The get() function gives us the topic we're currently working with.
 
+    # Make sure the topic belongs to the current user:
+    if topic.owner != request.user:
+        raise Http404
+
     entries = topic.entry_set.order_by('-date_added')
     #We also need the entries associated with the current topic.
     # Once again, we recieve them using the same method as we did in the Django shell.
@@ -60,6 +66,7 @@ def topic(request, topic_id):
     #We enter the attributes above to the context, which let's us reach them from the template-file.
 
     return render(request, 'learning_logs/topic.html', context)
+
 
 @login_required
 def new_topic(request):

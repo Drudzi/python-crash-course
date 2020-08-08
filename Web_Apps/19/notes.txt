@@ -535,4 +535,11 @@ ALLOWING USERS TO OWN THEIR DATA:
                 
                 Protecting a User's Topics:
 
-                    ...
+                    Even if a user don't own any topics, he can atm reach other user's topics
+                    by requesting the URLs of the topic pages.
+
+                    To protect user's from this, we raise a 404 when this happens.
+                    We check in views.py - topic function if the topic.owner isn't equal to the
+                    user coming from the request, if so we raise 404.
+                    Check views.py.
+                    
