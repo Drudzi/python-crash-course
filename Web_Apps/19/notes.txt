@@ -542,4 +542,23 @@ ALLOWING USERS TO OWN THEIR DATA:
                     We check in views.py - topic function if the topic.owner isn't equal to the
                     user coming from the request, if so we raise 404.
                     Check views.py.
-                    
+                
+                Protecting the edit_entry Page:
+
+                    Like the topics, people can also access the edit_entry URLs to edit other users entries.
+                    Let's protect the edit_entry pages like we did with the topics pages.
+                    We check if the topic owner is the same user as request.user.
+                    Check views.py and edit_entry().
+
+                    We raise a 404 exception if a user shouldn't be on the current page.
+                
+                Associating New Topics with the Current User:
+
+                    Currently, our page for creating new topics is broken.
+                    This is because we haven't defined a way for Django to know which user the topic should belong to.
+                    Because of this, Django raises the IntegrityError.
+                    It says u can't create a topic with no owner assigned to it.
+
+                    What we need to do is to create a way to assign the current logged in user to the
+                    topic that is being created.
+                    We do this in views.py in the new_topic() definition.

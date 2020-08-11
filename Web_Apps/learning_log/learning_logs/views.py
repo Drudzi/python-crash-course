@@ -52,8 +52,7 @@ def topic(request, topic_id):
     #  The get() function gives us the topic we're currently working with.
 
     # Make sure the topic belongs to the current user:
-    if topic.owner != request.user:
-        raise Http404
+    check_topic_owner(request, topic)
 
     entries = topic.entry_set.order_by('-date_added')
     #We also need the entries associated with the current topic.
@@ -91,7 +90,20 @@ def new_topic(request):
             #    which we specified inside Topic in models.py.
             #     Also worth noting is that all fields in a form are required by default.
             
-            form.save() #If the data is valid, we'll save it to the database using save() method.
+            new_topic = form.save(commit=False)
+            #We call the save() function with commit=False so it doesn't directly save it to the database.
+            # Now it's stored in the new_topic variable.
+            #  We need to do this because Django needs to know which user the topic should belong to,
+            #   and the user can be found in the request using request.user.
+
+            new_topic.owner = request.user
+            #Now that we've got the new topic object stored in new_topic, we can use the attributes of the Topic
+            # model to access it's information.
+            #  Django needs to assign a user to the owner attribute before saving it to the database.
+            #   So we assign the request.user to the owner attribute of the new topic model object.
+
+            new_topic.save()
+            #Now we're ready to completely store it to the database.
 
             return redirect('learning_logs:topics')
             #When we've saved the data, we use redirect() and give it the topics page...
@@ -113,6 +125,9 @@ def new_entry(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     #We get the topic object we are currently working with using the topic_id from the URL.
 
+    # Make sure the topic belongs to the current user:
+    check_topic_owner(request, topic)
+     
     if request.method != 'POST':
         #If it's a GET request, we create a new empty form.
         # No data submitted, create a blank form:
@@ -153,6 +168,7 @@ def edit_entry(request, entry_id):
     """Edit an existing entry."""
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
+    check_topic_owner(request, topic)
 
     if request.method != 'POST':
         #If there is a GET request, we create a new form including the current Entry object.
@@ -174,3 +190,9 @@ def edit_entry(request, entry_id):
     
     context = {'form': form, 'topic': topic, 'entry': entry}
     return render(request, 'learning_logs/edit_entry.html', context)
+
+
+# Custom Helper Functions
+def check_topic_owner(request, topic):
+    if topic.owner != request.user:
+        raise Http404
