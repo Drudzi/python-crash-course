@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     #Here we add our own apps for the project, it's helpful to organize them in groups like this.
     # It's important to place your own apps before the default if you need to override their behaviour.
     
+    # Third party apps:
+    'bootstrap4',
+
     # Default Django apps:
     'django.contrib.admin',
     'django.contrib.auth',

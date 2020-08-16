@@ -1,0 +1,110 @@
+STYLING AND DEPLOYING AN APP:
+
+    Styling Learning Log:
+
+        So far, we've kind of ignored the looks of our web project.
+        We've focused mainly on functionality and making it work fully, which is a good way
+        of approaching these kind of projects.
+        An app is only useful if it works...
+        Looks are important for users, which is why it's a critical part of development.
+        To style our project, we'll use and integrate the django-bootstrap4 app.
+
+        The django-bootstrap4 App:
+
+            We use pip install django-bootstrap4 to install Bootstrap to our environment.
+            But to include Bootstrap, we need to include it in the INSTALLED_APPS list inside settings.py.
+        
+        Using Bootstrap to Style Learning Log:
+
+            Bootstrap has a large collection of styling tools and templates.
+            Templates apply to the overall style which makes them easier to use than
+            individual tools.
+            At getbootstrap.com, you can find all tools and templates.
+            We'll use the Navbar Static template.
+        
+        Modifying base.html:
+
+            To use the bootstrap4 template, we need to modify the base template.
+
+            Defining the HTML Headers:
+
+                We delete all content inside base.html.
+                The first thing we'll add and configure, is the HTML headers.
+
+                ...
+                {% load bootstrap4 %}
+
+                <!doctype html>
+                <html lang="en">
+                <head>
+                  <meta charset="utf-8">
+                  <meta name="viewport" content="width=devicewidth, initial-scale=1,
+                    shrink-to-fit=no">
+                  <title>Learning Log</title>
+
+                  {% bootstrap_css %}
+                  {% bootstrap_javascript jquery='full' %}
+
+                </head>
+                ...
+
+                On the first line, we load the collection of templates tags from bootstrap4.
+                The doctype defines what kind of file it should be considered as.
+                We also define the HTML language to english.
+
+                An HTML file contains two parts, the head and the body.
+                We begin defining the head on the fifth line and indent its content.
+                The head doesn't display any content, it just tells the browser what it needs
+                to know in order to actually display the page correctly.
+
+                The title tag, tells the browser what to name the page in the title bar.
+
+                The last two tags in the head are from bootstrap customs.
+                Bootstrap_CSS tells django to include all style files.
+                The last one enables all interactive behavior you might want to use on a page,
+                such as collapsible navigation bars.
+
+            Defining the Navigation Bar:
+
+                The code defining the navigation bar will be pretty long, so we'll work in sections.
+
+                ...
+                <body>
+
+                  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+
+                    <a class="navbar-brand" href="{% url 'learning_logs:index'%}">
+                        Learning Log</a>
+    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span></button>
+                ...
+
+                We start off by opening the body.
+                Then we open the navigation element (nav) which controls the navigation sextion on the page.
+
+                Everything inside this element is styled according to the Bootstrap style rules
+                defined by the selectors navbar, navbar-expand-md, adn the rest you see in "class"
+                at the nav-tag opener.
+
+                A selector determines which page elements apply to a certain style rule.
+                Selectors are defined in the class.
+                The navbar-ligth and bg-light selectors styles the navbar with a light background.
+                The mb-4 selector (mb stands for margin bottom) makes a little space 
+                appear between the navbar and the rest of the page.
+                The border selector provides a thin little border around the light background
+                to set it off a little from the rest of the page.
+
+                After opening the nav section, we define an anchor tag using the navbar-brand class.
+                Navbar-brand selector styles this link so it stands out a little from the rest.
+                A way of branding the site.
+                This project-name link will be on the left side and appear on every page.
+
+                Next, we define a button tag.
+                This button will only appear if the browser window is too narrow to display
+                the whole navbar horizontally.
+                When a user clicks this button, a drop down list of the navbar elements will appear.
+                The collapse reference causes the navbar to collapse when the user shrinks the browser window
+                or when the site is displayed on mobile devices with small screens.
