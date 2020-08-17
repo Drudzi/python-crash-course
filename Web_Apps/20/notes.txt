@@ -108,3 +108,29 @@ STYLING AND DEPLOYING AN APP:
                 When a user clicks this button, a drop down list of the navbar elements will appear.
                 The collapse reference causes the navbar to collapse when the user shrinks the browser window
                 or when the site is displayed on mobile devices with small screens.
+
+                ...
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'learning_logs:topics'%}">
+                          Topics</a></li>
+                  </ul>
+                ...
+
+                We add the code above just below the span-tag.
+                By opening the div-tag, we start a new section of the navbar.
+                Div stands for division.
+                You build web pages by dividing it into divisons (sections)
+                and design behaviour and styling for each section.
+
+                The styling or behaviour rules you assign in the div-opening affect all the content in the div section.
+                This code is the beginning of the collapsed navbar that will appear on smaller screens or windows.
+
+                At the UL-tag, we define a new set of links.
+                Bootstrap defines the navigation elements as items in an unordered list with style
+                rules that make it look nothing like a list.
+                Any link or element you need or want on the navbar can be included in one of these UL lists.
+
+                Then we create a list item, which is a link to our topics page.
+
