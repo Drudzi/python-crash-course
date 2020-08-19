@@ -134,3 +134,97 @@ STYLING AND DEPLOYING AN APP:
 
                 Then we create a list item, which is a link to our topics page.
 
+                ...
+                    <ul class="navbar-nav ml-auto">
+                      {% if user.is_authenticated %}
+                        <li class="nav-item">
+                          <span class="navbar-text">Hello, {{user.username}}.</span>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+                        </li>
+                      {% else %}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+
+                </nav>
+                ...
+                Here, we do once again begin a new set of links by opening the UL tag.
+                You are allowed to have as many groups of links on a page as you want.
+                This gruop will be the login, logout and registration links, which will
+                be located on the right side of the navbar due to ml-auto selector in the UL opening.
+                ml-auto stands for margin left automatic, which means it examines the other elements in navbar
+                and pushes these to the right side with the right amount. It creates a margin to the left.
+
+                Then, we start an if block, the same we used before to examine whether a user
+                is logged in or not.
+                If the user is logged in, we start by displaying a welcoming message.
+                For this, we use the span tag.
+                The span element is used to create and style pieces of text or other elements on a page
+                that are part of a longer line. In this case we don't want this text to be a link
+                like logout, login and register will be.
+                
+                Then we create our other navbar elements, which are all going to be links using
+                anchor tags.
+
+                We also close this div, which contains the elements that will be in the collapsed navbar.
+                The navbar is done for now and we also close the nav tag.
+
+            Defining the Main Part of the Page:
+
+                The rest of base.html will contain the main page.
+
+                ...
+                  <main role="main" class="container">
+                    <div class="pb-2 mb-2 border-bottom">
+                      {% block page_header %}{% endblock page_header %}
+                    </div>
+                    <div>
+                      {% block content %}{% endblock content %}
+                    </div>
+                  </main>
+
+                </body>
+
+                </html>
+                ...
+
+                We begin with opening the main tag, which is the main and most significant part
+                of the body.
+                We use the container selector, which is a simple and effective way of grouping elements.
+                In this container, we use two div tags.
+                The first one, the page_header will mostly be used for titles and headlines.
+                And compared to the other div, we use some selectors to make this div stand out.
+                
+                The pb-2 selector stands for padding bottom, and padding refers to space between
+                an elements content and it's border. This selector provides a moderate amount
+                of padding at the bottom of the element.
+
+                The mb-2 selector stands for margin bottom, and a margin refers to the space between
+                an elements border and other elements on the page.
+
+                We also the border-bottom selector, which provides a thin border at the bottom
+                of the page_header block.
+
+                The next div tag includes the content block.
+                For this part, we don't use any selectors because the styling may differ from
+                page to page.
+
+                Start the server and see the new page with the professional navbar.
+
+            Styling the Home Page Using a Jumbotron:
+
+                To update and style the home page, we'll use something called a jumbotron.
+                A jumbotron is a large box that stands out from the rest of the page,
+                it can contain whatever you want.
+                Most likely, it's used on a home page to hold a brief description of the overall project.
+
+                Let's go into index.html:
+                
