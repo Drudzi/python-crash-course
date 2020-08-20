@@ -227,4 +227,93 @@ STYLING AND DEPLOYING AN APP:
                 Most likely, it's used on a home page to hold a brief description of the overall project.
 
                 Let's go into index.html:
+
+                ...
+                {% extends "learning_logs/base.html" %}
+
+                {% block page_header %}
+                  <div class="jumbotron">
+                    <h1 class="display-3">Track your learning.</h1>
+
+                    <p class="lead">
+                        Make your own Learning Log, and keep a list of the topics
+                        you're learning about. Whenever you learn something new about a topic
+                        make an entry summarizing what you've learned.
+                    </p>
+
+                    <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}"
+                        role="button">Register &raquo;</a>
+                  </div>
+                {% endblock page_header %}
+                ...
+
+                We begin by opening the page_header block and start the division (section) using the jumbotron selector.
+                A jumbotron is not really a thing of its own, it's just a div element with a certain set of
+                styling directives from Bootstrap applied to it.
+
+                The jumbotron consists of three elements.
+                The first one is the h1, which is a first level header (rubrik), which displays a short message.
+                For the h1, we use the display-3 selector which gives it a thinner and taller look.
+
+                The second element is just a simple paragraph with some more detailed information about the project.
+
+                The third element is a welcoming register button.
+                As you can see, we can create a button of an anchor tag link using selectors. 
+                btn (button) is making the element a button.
+                btn-lg makes the button a bit larger.
+                btn-primary give the button a blue color which makes it pop out more.
+
+                In between the anchor tags, we define what text the button should display.
+                After register we write &raquo; which is called an HTML entity that looks like >>.
+
+            Styling the Login Page:
+
+                Let's modify login.html.
+                Here's the new code:
+
+                ...
+                {% extends "learning_logs/base.html" %}
+                {% load bootstrap4 %}
+
+                {% block page_header %}
+                  <h2>Log in to your account.</h2>
+                {% endblock page_header %}
+
+                {% block content %}  
+                  <form method="post" action="{% url 'users:login' %}" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                      <button name="submit" class="btn btn-primary">Log in</button>
+                    {% endbuttons %}
+    
+                    <input type="hidden" name="next"
+                    value="{% url 'learning_logs:index' %}" />
+                  </form>
+
+                  {% endblock content %}
+                  ...
+
+                  We begin with loading the bootstrap template tags onto our file.
+
+                  In the page_header, we display a lvl 2 header showing a informative message.
+
+                  Then we start the content block.
+                  Notice that we removed the {% if form.errors %}-block, this is because bootstrap handles form errors automatically.
+
+                  When we open the form tag, we insert the form class from bootstrap so bootstrap knows it's a form and uses its styling.
+                  We replace {{ form.as_p }} with {% bootstrap_form form %} to apply the form styling from bootstrap to
+                  the form's individual elements.
+                  
+                  After that, we open the bootstrap template tag {% buttons %} which adds bootstrap styling to buttons.
+
+              Styling the Topics Page:
+
+                  The topics page doesn't need a lot of work.
+                  We move the topics header into the page_header block and remove it from the content block.
+
+                  We add an h3 tag before the links to the topics and to the other elements.
                 
+              Styling the Entries on the Topic Page:
+
+                  ...
