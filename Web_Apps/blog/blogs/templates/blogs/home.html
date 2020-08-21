@@ -1,25 +1,34 @@
 {% extends "blogs/base.html" %}
 
+{% block page_header %}
+  <div class="jumbotron">
+    <h1 class="display-3">Welcome to the blog.</h1>
+
+    <p class="lead">
+      Read our blogposts about the latest news or submit your own works.
+    </p>
+
+    <a class="btn btn-lg btn-dark" href="{% url 'users:register' %}">
+      Register &rsaquo;
+    </a>
+  </div>
+{% endblock page_header %}
+
 {% block content %}
+  <p class=my-3><a href="{% url 'blogs:new_post' %}">Create new post</a></p>
 
-  <p>Welcome to my blog!</p>
-
-  <p><a href="{% url 'blogs:new_post' %}">Create new post</a></p>
-
-  <ul>
-  {% for post in posts %}  
-    <li>
-      <b>{{ post }}</b>
-      <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
-      <p>{{ post.text|linebreaks }}</p>
-
-      <p>Author: {{ post.author }}</p>
-
-      <p><a href="{% url 'blogs:edit_post' post.id %}">Edit post</a></p>
-    </li>
-  {% empty %}
-   <li>There are no published posts yet.</li>
-  {% endfor %} 
-  </ul>
+  {% for post in posts %}
+    <div class="card mb-4">
+      <h5 class="card-header">
+        {{ post.title }}
+        <small class="text-info">{{ post.date_added|date:'F d, Y' }}</small>
+      </h5>
+      <div class="card-body">
+        {{ post.text|linebreaks }}
+        <p class="my-auto">Author {{ post.author }}</p>
+        <a href="{% url 'blogs:edit_post' post.id %}">Edit post</a>
+      </div>
+    </div>
+    {% endfor %}
 
 {% endblock content %}

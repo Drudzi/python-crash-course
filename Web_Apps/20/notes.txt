@@ -316,4 +316,50 @@ STYLING AND DEPLOYING AN APP:
                 
               Styling the Entries on the Topic Page:
 
+                  The individual topic page needs some work, it's the page with the most content.
+
                   ...
+                  {% extends 'learning_logs/base.html' %}'
+
+                  {% block page_header %}
+                    <h3>{{ topic }}</h3>
+                  {% endblock page_header %}
+  
+                  {% block content %}
+                    <p>
+                      <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a>
+                    </p>
+
+                    {% for entry in entries %}
+                      <div class="card mb-3">
+                        <h4 class="card-header">
+                          {{ entry.date_added|date:'M d, Y H:i' }}
+                          <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+                              edit entry</a></small>
+                        </h4>
+                        <div class="card-body">
+                          {{ entry.text|linebreaks }}
+                        </div>
+                      </div>
+                    {% empty %}
+                      <p>There are no entries for this topic yet.</p>
+                    {% endfor %}
+
+                  {% endblock content %}
+                  ...
+
+                  The first thing we do is to move the topic-name into the header as a headlining lvl 3 header.
+
+                  Before, we displayed each entry as a list item in a UL tag but
+                  now we create a whole new div section for each entry.
+                  These div elements use the card selector which makes each entry pop out and have
+                  its own section. Looks like a card.
+
+                  Our cards has two nested elements, one header and one body.
+                  The header is a lvl 4 header tag with the card-header selector.
+                  This element contains the datetime the entry was created and also 
+                  a link to edit the entry using the <small> tag.
+                  The small tag makes it appear a bit smaller than the timestamp.
+
+                  The second element is a nested div element with the card-body selector.
+                  Here, we place the actual text from the entry, in a simple box on the card.
