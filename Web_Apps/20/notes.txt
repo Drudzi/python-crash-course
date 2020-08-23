@@ -291,75 +291,158 @@ STYLING AND DEPLOYING AN APP:
                     value="{% url 'learning_logs:index' %}" />
                   </form>
 
-                  {% endblock content %}
-                  ...
+                {% endblock content %}
+                ...
 
-                  We begin with loading the bootstrap template tags onto our file.
+                We begin with loading the bootstrap template tags onto our file.
 
-                  In the page_header, we display a lvl 2 header showing a informative message.
+                In the page_header, we display a lvl 2 header showing a informative message.
 
-                  Then we start the content block.
-                  Notice that we removed the {% if form.errors %}-block, this is because bootstrap handles form errors automatically.
+                Then we start the content block.
+                Notice that we removed the {% if form.errors %}-block, this is because bootstrap handles form errors automatically.
 
-                  When we open the form tag, we insert the form class from bootstrap so bootstrap knows it's a form and uses its styling.
-                  We replace {{ form.as_p }} with {% bootstrap_form form %} to apply the form styling from bootstrap to
-                  the form's individual elements.
-                  
-                  After that, we open the bootstrap template tag {% buttons %} which adds bootstrap styling to buttons.
-
-              Styling the Topics Page:
-
-                  The topics page doesn't need a lot of work.
-                  We move the topics header into the page_header block and remove it from the content block.
-
-                  We add an h3 tag before the links to the topics and to the other elements.
+                When we open the form tag, we insert the form class from bootstrap so bootstrap knows it's a form and uses its styling.
+                We replace {{ form.as_p }} with {% bootstrap_form form %} to apply the form styling from bootstrap to
+                the form's individual elements.
                 
-              Styling the Entries on the Topic Page:
+                After that, we open the bootstrap template tag {% buttons %} which adds bootstrap styling to buttons.
 
-                  The individual topic page needs some work, it's the page with the most content.
+            Styling the Topics Page:
 
-                  ...
-                  {% extends 'learning_logs/base.html' %}'
+                The topics page doesn't need a lot of work.
+                We move the topics header into the page_header block and remove it from the content block.
 
-                  {% block page_header %}
-                    <h3>{{ topic }}</h3>
-                  {% endblock page_header %}
-  
-                  {% block content %}
-                    <p>
-                      <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a>
-                    </p>
+                We add an h3 tag before the links to the topics and to the other elements.
+            
+            Styling the Entries on the Topic Page:
 
-                    {% for entry in entries %}
-                      <div class="card mb-3">
-                        <h4 class="card-header">
-                          {{ entry.date_added|date:'M d, Y H:i' }}
-                          <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">
-                              edit entry</a></small>
-                        </h4>
-                        <div class="card-body">
-                          {{ entry.text|linebreaks }}
-                        </div>
-                      </div>
-                    {% empty %}
-                      <p>There are no entries for this topic yet.</p>
-                    {% endfor %}
+                The individual topic page needs some work, it's the page with the most content.
 
-                  {% endblock content %}
-                  ...
+                ...
+                {% extends 'learning_logs/base.html' %}'
 
-                  The first thing we do is to move the topic-name into the header as a headlining lvl 3 header.
+                {% block page_header %}
+                <h3>{{ topic }}</h3>
+                {% endblock page_header %}
 
-                  Before, we displayed each entry as a list item in a UL tag but
-                  now we create a whole new div section for each entry.
-                  These div elements use the card selector which makes each entry pop out and have
-                  its own section. Looks like a card.
+                {% block content %}
+                <p>
+                    <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a>
+                </p>
 
-                  Our cards has two nested elements, one header and one body.
-                  The header is a lvl 4 header tag with the card-header selector.
-                  This element contains the datetime the entry was created and also 
-                  a link to edit the entry using the <small> tag.
-                  The small tag makes it appear a bit smaller than the timestamp.
+                {% for entry in entries %}
+                    <div class="card mb-3">
+                    <h4 class="card-header">
+                        {{ entry.date_added|date:'M d, Y H:i' }}
+                        <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+                            edit entry</a></small>
+                    </h4>
+                    <div class="card-body">
+                        {{ entry.text|linebreaks }}
+                    </div>
+                    </div>
+                {% empty %}
+                    <p>There are no entries for this topic yet.</p>
+                {% endfor %}
 
-                  The second element is a nested div element with the card-body selector.
-                  Here, we place the actual text from the entry, in a simple box on the card.
+                {% endblock content %}
+                ...
+
+                The first thing we do is to move the topic-name into the header as a headlining lvl 3 header.
+
+                Before, we displayed each entry as a list item in a UL tag but
+                now we create a whole new div section for each entry.
+                These div elements use the card selector which makes each entry pop out and have
+                its own section. Looks like a card.
+
+                Our cards has two nested elements, one header and one body.
+                The header is a lvl 4 header tag with the card-header selector.
+                This element contains the datetime the entry was created and also 
+                a link to edit the entry using the <small> tag.
+                The small tag makes it appear a bit smaller than the timestamp.
+
+                The second element is a nested div element with the card-body selector.
+                Here, we place the actual text from the entry, in a simple box on the card.
+              
+    Deploying Learning Log:
+
+        Our project is now fully functional, usable and professional looking.
+        Let's now deploy it to a live server so anyone on the internet can use it.
+
+        For this we'll use Heroku, which is a web-based platform that let's you
+        manage and deploy web applications.
+
+        Making a Heroku Account:
+
+            I register at heroku.com.
+        
+        Installing the Heroku CLI:
+
+            To deploy and manage projects on Heroku's servers, we need the tools available
+            in tge Heroku Command Line Interface (CLI).
+            We go to the Heroku Docs and find the installation for CLI.
+
+        Installing Required Packages:
+
+            pip install psycopg2
+                The psycopg2 package is required to manage the database that Heroku uses.
+
+            pip install django-heroku
+                The django-heroku package handles pretty much all the configuration that is needed
+                for our app to run properly on Heroku's servers.
+            
+            pip install gunicorn
+                The gunicorn package provides a server capable of serving apps in a live environment.
+
+        Creating a requirements.txt File:
+            
+            Heroku needs to know which packages our project depends on, so we'll create a list of these
+            using pip and the command below.
+                pip freeze > requirements.txt
+            
+            The freeze command tells pip to write the names of all the packages currently installed
+            in the project into the file requirements.txt which will be created.
+            Check this file, and we'll see our packages and what versions they are.
+
+            Heroku needs these because it will create an environment when we deploy our project,
+            and it needs to install all of the packages for our project to work properly.
+
+        Specifying the Python Runtime:
+
+            Unless we specify a Python version, Heroku will use its default version but let's
+            make sure we're on the same page.
+            We check our Python version using python --version in CMD.
+            We copy this version (Python 3.8.3) into a new file called runtime.txt which
+            we place in the same directory as our manage.py file.
+            
+            python-3.8.3
+                Make sure to only have one line in this file containing the text above.
+                Make sure to format the python version like above.
+                Python should be lowercase and bind python and the version number together using a hyphen.
+        
+        Modifying settings.py for Heroku:
+
+            ...
+            # Heroku settings:
+            import django_heroku
+            django_heroku.settings(locals())
+            ...
+
+            We add the code above to the very end of settings.py to define some specific
+            settings for the Heroku environment.
+
+        Making a Procfile to Start Processes:
+
+            A PROCFILE tells Heroku which processes to start to properly serve the project.
+            We'll create a new file called "Procfile" with no extension in the same directory
+            as the manage.py file.
+            In this one-line file, we write:
+                web: gunicorn learning_log.wsgi --log-file -
+            
+            This line tells Heroku to use gunicorn as a server and to use the settings
+            in learning_logs/wsgi.py to launch the actual app.
+            The log-file flag tells Heroku the kind of events to log.
+
+        Using Git to Track the Project's Files:
+
+            ...
