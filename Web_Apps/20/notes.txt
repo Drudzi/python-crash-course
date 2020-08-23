@@ -445,4 +445,60 @@ STYLING AND DEPLOYING AN APP:
 
         Using Git to Track the Project's Files:
 
+            We make a new git repo and commit our working state. Se boken.
+
+        Pushing to Heroku:
+
+            Finally, we're ready to push our project onto Heroku.
+            While active in our venv, we issue the following commands:
+
+            heroku login
+                This takes us to a page where we login to our Heroku account on the CLI.
+            
+            heroku create
+                This line tells heroku to create a new empty project.
+                Heroku makes up a random name (word-word-number), which can later be changed.
+
+            git push heroku master
+                This line tells Git to push the master branch of our project to the
+                new repository heroku just created.
+                Then, Heroku builds the project on its live servers using these files.
+                
+                When this process is complete, you can find the URL we'll use
+                to access the live project, which we also can change along with the project name.
+                "https://stark-scrubland-20886.herokuapp.com/"
+            
+            Now our project is actually deployed! ...but not fully configured.
+            To check that the server process started correctly, use heroku ps in console.
+
+                At the first line, we can see how many free hours are left for our project to
+                be live this month. Heroku allows for up to 550 free hours a month.
+                If this limit is reached, Heroku will show an error page, which we'll customize later.
+            
+            heroku open
+                We're live and we can request our project in the browser using a URL but this command
+                opens it for us automatically in the browser.
+            
+            ***
+            Notera att det inte går att använda appen fullt ut än eftersom databasen inte är
+            konfigurerad, går exempelvis inte att registrera eller logga in.
+            ***
+
+        Setting Up the Database on Heroku:
+
+            Just like we did in our local Django project, we need to run the migrate command
+            to create and migrate the database.
+            You can run Django and Python commands on a Heroku project using the command heroku run.
+
+            heroku run python manage.py migrate
+                After running this, we see the same migration process as when we did this locally.
+            
+            Now we can use our project just like we could locally!!!
+
+            Notice the data (users, topics...) isn't there, this is because we're not on the same database.
+            This is very normal practice, you usually don't copy the local data onto the live project
+            because it's most likely just testing data.
+        
+        Refining the Heroku Deployment:
+
             ...
