@@ -501,4 +501,36 @@ STYLING AND DEPLOYING AN APP:
         
         Refining the Heroku Deployment:
 
+            It's time to refine and "perfect" our deployment.
+            We will create a superuser so we can administrate.
+            We'll also set DEBUG to False, so the Django error specifications don't come up
+            when people get errors. This could be dangerous if hackers got to see the detailed info.
+
+            Creating a Superuser on Heroku:
+
+                Instead of running commands using heroku run...
+                We'll try opening a bash terminal session using 'heroku run bash'.
+                The Bash language runs in many Linux terminals and we'll use it to
+                set up our superuser account.
+
+                python manage.py createsuperuser
+
+                Now we can access the admin page.
+
+            Creating a User-Friendly URL on Heroku:
+
+                https://stark-scrubland-20886.herokuapp.com/
+
+                The above URL is weird and not really memorable.
+                We can thankfully rename the app using a single command in the venv:
+
+                heroku apps:rename learning-log-020315
+                This name needs to be all unique.
+
+                With the free version of heroku, the server will go to sleep when it hasn't
+                recieved any request for a while. When you request it again the first time, 
+                it will be a bit slower.
+        
+        Securing the Live Project:
+
             ...
