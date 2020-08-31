@@ -533,4 +533,12 @@ STYLING AND DEPLOYING AN APP:
         
         Securing the Live Project:
 
-            ...
+            The fact that the DEBUG setting is set to True is a big security issue for our deployment.
+            The error pages Django provides when DEBUG is True contain vital information for attackers.
+
+            We'll control whether this debugging info is shown on the live server by
+            setting something called an environment variable.
+            Like the sound of it, environment variables are values set in a specific environment.
+
+            Using environment variables is a way to store sensitive information on a server,
+            by keeping it separate from the rest of the project's code.
