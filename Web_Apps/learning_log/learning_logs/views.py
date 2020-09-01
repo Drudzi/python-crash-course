@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 #render() function renders a response based on data provided by views.
 #The redirect() function is used to redirect a user back to a given page.
 # redirect() takes the name of a view-function and redirects to that view, displaying its template. 
@@ -46,10 +46,12 @@ def topic(request, topic_id):
     #Our first view with a parameter other than request.
     # It will retrieve the integer stored in topic_id from the URL-pattern.
 
-    topic = Topic.objects.get(id=topic_id)
-    #Here we'll assign the topic-object assigned to the topic-id from the URL...
-    # using the same method we used in the Django shell.
-    #  The get() function gives us the topic we're currently working with.
+    topic = get_object_or_404(Topic, id=topic_id)
+    #topic = Topic.objects.get(id=topic_id)
+    # Here we'll assign the topic-object assigned to the topic-id from the URL...
+    #  using the same method we used in the Django shell.
+    #   The get() function gives us the topic we're currently working with.
+    #    In Chapter 20 we switch Topic.objects.get() to get_object_or_404() to handle errors better.
 
     # Make sure the topic belongs to the current user:
     check_topic_owner(request, topic)

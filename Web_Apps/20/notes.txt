@@ -542,3 +542,142 @@ STYLING AND DEPLOYING AN APP:
 
             Using environment variables is a way to store sensitive information on a server,
             by keeping it separate from the rest of the project's code.
+
+            Let's modify settings.py.
+            We add 4 lines under Heroku settings so Django looks for an
+            environment variable when the project is running on Heroku.
+            ...
+            if os.environ.get('DEBUG') == 'TRUE':
+                DEBUG = True
+            elif os.environ.get('DEBUG') == 'FALSE':
+                DEBUG = False
+            ...
+            The os.environ.get() method reads the value associated with a specific environment variable
+            in any environment where the project is running.
+            Using the if-elif block, we'll set DEBUG to True if its value is TRUE and False if value is FALSE.
+        
+        Committing and Pushing Changes:
+
+            The changes to settings.py will now need to be committed to the Git-repo and then pushed to heroku.
+            In the terminal (venv):
+
+                git commit -am "Set DEBUG based on environment variables."
+                git status
+
+            We issue the git commit command including a descriptive message of what changes have been made.
+            Don't forget the -am flag which makes the commit include all the files that have been changed.
+            
+            Make sure to issue git status to make sure that all changes have been committed to the master branch.
+
+            Let's push this to heroku:
+
+                git push heroku master
+            
+            Heroku recognizes the update of the repository and rebuilds our project with the new changes taken into account.
+        
+        Setting Environment Variables on Heroku:
+
+            Now that our heroku environment is ready, we can set DEBUG to what we want.
+            In terminal sesh:
+
+                heroku config:set DEBUG='FALSE'
+                    ...
+                    Setting DEBUG and restarting ⬢ learning-log-020315... done, v7
+                    DEBUG: 'FALSE'
+                    ...
+                
+            The command heroku config:set sets an environment variable for us.
+            We set DEBUG to FALSE (everytime an environment variable is set on heroku, it restarts the project).
+
+            ERROR!!!
+            WRITING ...:set DEBUG='FALSE' does not work. IT SHOULD BE ...:set DEBUG=FALSE
+
+        Creating Custom Error Pages:
+
+            We've configured Learning Log to return 404 error pages when a user requests
+            pages they can't have access to. There are also 500 server errors (internal errors).
+            A 404 usually means you code is correct, but the object requested doesn't exist.
+            A 505 ususally means there are code errors, such as errors inside functions in views.py.
+            Currently, our project returns the same general page for these errors but
+            now we'll make our own error pages to match the design of the Learning Log project.
+
+            Making Custom Templates:
+
+                For these HTML files, we need to make a new template directory located in the outermost
+                learning_log folder where manage.py is located.
+
+                404.html:
+                ...
+                {% extends 'learning_logs/base.html' %}
+
+                {% block page_header %}
+                  <h2>The item you requested is not available. (404)</h2>
+                {% endblock page_header %}
+                ...
+
+                500.html:
+                ...
+                {% extends 'learning_logs/base.html' %}
+
+                {% block page_header %}
+                  <h2>There has been an internal error. (500)</h2>
+                {% endblock page_header %}
+                ...
+
+                Two basic error messages.
+                These two new files require a slight change to settings.py.
+                Inside the dict in the TEMPLATES list, we go to the 'DIRS' key and create a list item in its list.
+                ...
+                'DIRS': [os.path.join(BASE_DIR, 'templates')]
+                ...
+                This change tells Django to look in the root template directory for the error page templates.
+            
+            Viewing the Error Pages Locally:
+
+                Before pushing the error templates to heroku, we might want to see them locally.
+                We do this by setting DEBUG inside settings.py to False.
+                To see 404, request a URL that doesn't exist or belong to current user.
+                To see 500, request like http://localhost:8000/topics/999/ unless you've created 999 topics already!
+
+                For further development, set DEBUG to True.
+            
+            Pushing the Changes to Heroku:
+
+                In venv terminal session:
+
+                    git add .
+                    git commit -am "Added custom 404 and 500 pages."
+                    git push heroku master
+                
+                Notice 'git add .'
+                We include that because we made new files which git needs to include into the repository.
+            
+            Using the get_object_or_404() Method:
+
+                At this point, when a user requests a topic or entry that doesn't exist,
+                they get a 500 server error.
+                Shouldn't that be a 404 instead. Yes, that's more like a 404.
+                The thing that happens is that Django tries to render the nonexistent page,
+                but it doesn't have enough information to do so, which returns a 500 error thinking it's some code issues.
+
+                This situation would be more accurately handled as a 404 error and we can implement
+                this behavior using the Django shortcut function get_object_or_404().
+
+                This function tries to get the request from the database, but if the request object
+                doesn't exist, it raises a 404 error instead.
+
+                To make this work, we import the function to views.py and replace Topic.objects.get()
+                inside the topic-function with get_object_or_404().
+                We push the changes to Heroku.
+        
+        Ongoing Development:
+
+            ...
+
+        The SECRET_KEY Setting:
+
+            ...
+        
+        Deleting a Project on Heroku:
+
+            ...
