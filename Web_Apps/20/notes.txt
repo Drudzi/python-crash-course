@@ -672,12 +672,35 @@ STYLING AND DEPLOYING AN APP:
         
         Ongoing Development:
 
-            ...
+            There's a fairly consistent for updating projects like the Learning Log.
+
+            Step 1:
+                Make your local project file changes, and if these changes include new files:
+                Issue the git add . command to add them to the Git repo.
+                If your changes require a database migration, git add . is necessary because
+                the migration generates a new migration file.
+            
+            Step 2:
+                Commit your changes to the Git repo using the git commit -am "informative message".
+                After the commit, you need to push the changes to Heroku using
+                git push heroku master
+                If you migrated the database locally, you'll need that on the live Heroku database aswell.
+                Enter this: heroku run python manage.py migrate
+
+            Step 3:
+                Make sure the changes have been made and are active in the live project!
 
         The SECRET_KEY Setting:
 
-            ...
+            Django uses the value of the SECRET_KEY variable in settings.py
+            to implement a number of security protocols.
+
+            For this project, we've included our SECRET_KEY in settings.py in our final commit.
+            For a practice project like this, that's fine but you should be more careful
+            with this when you're building a serious project.
         
         Deleting a Project on Heroku:
 
-            ...
+            To make things clear: Deleting a project on Heroku does nothing to your local project.
+            Delete your project either on their website or in the command prompt using the following:
+                heroku apps:destroy --app appname
