@@ -379,7 +379,7 @@ STYLING AND DEPLOYING AN APP:
         Installing the Heroku CLI:
 
             To deploy and manage projects on Heroku's servers, we need the tools available
-            in tge Heroku Command Line Interface (CLI).
+            in the Heroku Command Line Interface (CLI).
             We go to the Heroku Docs and find the installation for CLI.
 
         Installing Required Packages:
