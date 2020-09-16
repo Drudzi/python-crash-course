@@ -12,10 +12,10 @@ class TopicForm(forms.ModelForm):
         model = Topic
         #model tells Django what model to base the form on.
 
-        fields = ['text']
+        fields = ['text', 'public']
         #fields-list tells Django what fields to include.
 
-        labels = {'text': ''}
+        labels = {'text': '', 'public': 'Public'}
         #The labels dictionary what to label the fields.
         # We'll leave it empty because it looks clean.
 

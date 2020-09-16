@@ -8,9 +8,16 @@
 
 {% block content %}
   {% for topic in topics %}
-    <h4 class="card card-header mb-2">
-      <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-    </h4>
+    {% if topic.public == False %}
+      <h4 class="card card-header mb-3 mt-3 shadow-sm bg-white">
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+      </h4>
+    {% endif %}
+    {% if topic.public == True %}
+      <h4 class="card card-header mb-3 mt-3 shadow-sm bg-white">
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}<small class="float-right">public</small></a>
+      </h4>
+    {% endif %}
   {% empty %}
     <h4>No topics have been added yet.</h4>
   {% endfor %}

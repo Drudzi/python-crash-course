@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 #This decorator checks if a user is logged in, and only runs the function below if so.
 # If the user isn't logged in they'll be directed to the login page.
 
+from django.db.models import Q
+
 from django.http import Http404
 
 from .models import Topic, Entry
@@ -27,11 +29,13 @@ def index(request):
 @login_required #We apply this decorator to the topics function. Directors need @ in front.
 def topics(request):
     """Show all topics."""
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    topics = Topic.objects.filter(Q(owner=request.user) | Q(public=True)).order_by('date_added')
     #We assign the topics attribute a queryset from the database of the topics.
     # Using function order_by(), we order by the date_added attribute in the Topic class/model.
 
-    context = {'topics': topics}
+    public_topics = Topic.objects.filter(public=True).order_by('date_added')
+
+    context = {'topics': topics, 'public_topics': public_topics}
     #Here we define the context attribute. A context is a dictionary,
     # where the keys are the names we'll use in our template to access our data and
     #  where the values are the data we need to send to the template.
@@ -188,7 +192,7 @@ def edit_entry(request, entry_id):
         #   This assigns the data to the right Entry-object.
         if form.is_valid():
             form.save()
-            return redirect('learning_logs:topic', topic_id=topic_id)
+            return redirect('learning_logs:topic', topic_id=topic.id)
     
     context = {'form': form, 'topic': topic, 'entry': entry}
     return render(request, 'learning_logs/edit_entry.html', context)

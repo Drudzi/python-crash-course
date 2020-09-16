@@ -24,6 +24,8 @@ class Topic(models.Model):
     # We also include the on_delete argument with CASCADE so all topics bound to a user gets
     #  deleted if the owning user gets deleted.
 
+    public = models.BooleanField(default=False)
+
     def __str__(self):
         #We tell Django which attribute to use by default when it displays info about a topic using __str__ method.
         # Django calls a __str__ method to display a simple representation of a model.
